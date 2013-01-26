@@ -1,7 +1,7 @@
 ArrayList dots = new ArrayList();
 boolean dotSelected = false;
 color[] colors = {
-  color(50), 
+  color(100), 
   color(225, 50, 50), 
   color(50, 225, 50), 
   color(50, 50, 225), 
@@ -30,6 +30,7 @@ class ColorDot
   void draw()
   {
     push();
+    // DOT SELECTED BEHAVIOR
     if (selected)
     {
       fill(c);
@@ -44,6 +45,7 @@ class ColorDot
         start += millis()-prevMillis;
       }
     }
+    // ORBIT BEHAVIOR
     else
     {
       prevMillis = millis();
@@ -54,8 +56,11 @@ class ColorDot
       float a = atan2(y, x)-(t/9);
       x = d*cos(a)+HW;
       y = d*sin(a)+HH;
-      stroke(c);
       strokeWeight(3);
+      noFill();
+      stroke(0);
+      ellipse(x, y, 20, 20);
+      stroke(c);
       if (dist(x, y, mouseX, mouseY) < 16)
       {
         fill(c);
@@ -68,7 +73,6 @@ class ColorDot
       }
       else
       {
-        noFill();
         ellipse(x, y, 16, 16);
       }
       prev = new Point(round(x), round(y));
