@@ -24,7 +24,7 @@ class Spiro
 
     pushMatrix();
     float t = 0;
-    translate(width/2, height/2);
+    translate(HW, HH);
     beginShape();
     float b2, b1 = 1/(1-(br/lr));
     int i;
