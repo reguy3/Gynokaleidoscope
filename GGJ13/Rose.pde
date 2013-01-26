@@ -15,10 +15,17 @@ class Rose extends Shape
     rot = g;
     c = ci;
   }
+  Rose(ColorDot src)
+  {
+    petals = 2;
+    radius = floor(dist(mouseX, mouseY, HW, HH)/2);
+    rot = atan2(mouseY-HH, mouseX-HW);
+    c = src.c;
+  }
 
   void draw()
   {
-    radius += oscillation()*2;
+    float currRadius = radius + oscillation()*10;
     push();
     fill(c);
     stroke(c);
@@ -29,15 +36,15 @@ class Rose extends Shape
     beginShape();
     while (t <= TWO_PI)
     {
-      float x = radius*(cos(petals*t)*sin(t));
-      float y = radius*(cos(petals*t)*cos(t));
+      float x = currRadius*(cos(petals*t)*sin(t));
+      float y = currRadius*(cos(petals*t)*cos(t));
       curveVertex(x, y);
       t += STEP;
     }
     for (byte i=0;i<3;i++)
     {
-      float x = radius*(cos(petals*t)*sin(t));
-      float y = radius*(cos(petals*t)*cos(t));
+      float x = currRadius*(cos(petals*t)*sin(t));
+      float y = currRadius*(cos(petals*t)*cos(t));
       curveVertex(x, y);
       t += STEP;
     }

@@ -1,5 +1,3 @@
-
-
 /**
  * br = big radius
  * lr = little radius

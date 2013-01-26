@@ -33,6 +33,10 @@ class ColorDot
     // DOT SELECTED BEHAVIOR
     if (selected)
     {
+      stroke(0);
+      strokeWeight(5);
+      ellipse(prev.x, prev.y, 20, 20);
+      line(prev.x, prev.y, mouseX, mouseY);
       fill(c);
       stroke(c);
       strokeWeight(3);
@@ -43,14 +47,16 @@ class ColorDot
         selected = false;
         dotSelected = false;
         start += millis()-prevMillis;
-        if(currentShape<shapeCount)
+        if (currentShape<shapeCount)
         {
-          shapes.add(new Rose(4, floor(dist(mouseX, mouseY, HW, HH)), atan2(mouseY-HH, mouseX-HW), color(c)));  
+          shapes.add(new Rose(this));  
           currentShape++;
-          for(int i=0; i<currentShape; i++)
+          for (int i=0; i<currentShape; i++)
           {
             ((Shape)shapes.get(i)).scaleUp();
           }
+          dots.add(new ColorDot());
+          dots.remove(dots.indexOf(this));
         }
       }
     }
@@ -59,20 +65,22 @@ class ColorDot
     {
       prevMillis = millis();
       float t = (prevMillis-start)/3000f;
-      float x = 60*cos(t);
-      float y = 80*sin(t);
+      float x = 40*cos(t);
+      float y = 60*sin(t);
       float d = dist(0, 0, x, y);
       float a = atan2(y, x)-(t/9);
       x = d*cos(a)+HW;
       y = d*sin(a)+HH;
-      strokeWeight(3);
-      noFill();
-      stroke(0);
-      ellipse(x, y, 20, 20);
-      stroke(c);
+
       if (dist(x, y, mouseX, mouseY) < 16)
       {
+        stroke(0);
+        strokeWeight(5);
+        noFill();
+        ellipse(x, y, 20, 20);
         fill(c);
+        stroke(c);
+        strokeWeight(3);
         ellipse(x, y, 20, 20);
         if (!dotSelected && !pmousePressed && mousePressed)
         {
@@ -82,6 +90,12 @@ class ColorDot
       }
       else
       {
+        stroke(0);
+        strokeWeight(5);
+        noFill();
+        ellipse(x, y, 16, 16);
+        stroke(c);
+        strokeWeight(3);
         ellipse(x, y, 16, 16);
       }
       prev = new Point(round(x), round(y));
