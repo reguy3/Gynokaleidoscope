@@ -1,5 +1,3 @@
-
-
 /**
  * k = petals
  * r = radius

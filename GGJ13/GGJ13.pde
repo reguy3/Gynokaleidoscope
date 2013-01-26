@@ -55,7 +55,7 @@ void mouseClicked()
    petals = i;
    }
    }*/
-  roses.add(new Rose(4, floor(dist(mouseX, mouseY, HW, HH)), atan2(mouseY-HH, mouseX-HW), 0));
+  roses.add(new Rose(4, floor(dist(mouseX, mouseY, HW, HH)), atan2(mouseY-HH, mouseX-HW), color(255, 0, 0)));
 }
 
 void push()
