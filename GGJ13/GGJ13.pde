@@ -18,7 +18,7 @@ void setup()
   HH = height/2;
   dots = new ArrayList();
   for (byte i=0;i<4;i++)
-    dots.add(new ColorDot(floor(random(10000000))));
+    dots.add(new RoseDot(floor(random(10000000))));
   shapes = new ArrayList(shapeCount);
 }
 
