@@ -18,9 +18,10 @@ class Rose extends Shape
   }
   Rose(ColorDot src)
   {
-    petals = 2;
+    petals = ceil(((RoseDot) src).frame/((RoseDot) src).peelRate);
+    petals = petals%2 == 0 ? petals/2 : petals;
     radius = floor(dist(mouseX, mouseY, HW, HH));
-    rot = atan2(mouseY-HH, mouseX-HW);
+    rot = atan2(mouseY-src.prev.y, mouseX-src.prev.x) - HALF_PI;
     c = src.c;
   }
 

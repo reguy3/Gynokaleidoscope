@@ -79,7 +79,7 @@ class ColorDot
     }
     pop();
   }
-  
+
   Shape createNewShape() {
     return new Rose(this);
   }
@@ -112,14 +112,15 @@ class ColorDot
 
 class RoseDot extends ColorDot
 {
-  int frame = 0;
+  float peelRate = 60;
+  float frame = peelRate * 2;
   Rose rose = new Rose(0, 0, 0, 0);
 
   RoseDot(int... s)
   {
     super(s);
   }
-  
+
   Shape createNewShape()
   {
     return new Rose(this);
@@ -143,6 +144,19 @@ class RoseDot extends ColorDot
     strokeWeight(3);
     rose.pleaseDraw(4, 20, millis()/600f, x, y, c, 3);
     line(x, y, mouseX, mouseY);
+    push();
+    noStroke();
+    translate(mouseX, mouseY);
+    for (float i=0;i<TWO_PI;i+=TWO_PI/(frame/peelRate))
+    {
+      Point pos = new Point(ceil(16*cos(i)), ceil(16*sin(i)));
+      fill(0);
+      ellipse(pos.x, pos.y, 10, 10);
+      fill(c);
+      ellipse(pos.x, pos.y, 8, 8);
+    }
+    pop();
+    if (frame < 300) frame++;
   }
 }
 
@@ -150,18 +164,18 @@ class SpiroDot extends ColorDot
 {
   int frame = 0;
   Spiro spiro;
-  
+
   SpiroDot(int... s)
   {
     super(s);
     spiro = new Spiro(10, 20, 5, c);
   }
-  
+
   Shape createNewShape()
   {
     return new Spiro(this);
   }
-  
+
   void shape(float x, float y, boolean hover)
   {
     spiro.pleaseDraw(x, y, millis()/600f, 10, 20, 5, 0, hover ? 7 : 5);
