@@ -13,14 +13,13 @@ color[] colors = {
 class ColorDot
 {
   color c;
-  int start, type, prevMillis;
+  int start, prevMillis;
   boolean selected = false;
   Point prev;
 
   ColorDot(int... s)
   {
     c = colors[floor(random(8))];
-    type = floor(random(1)*4);
     if (s.length > 0)
       start = s[0];
     else
@@ -41,12 +40,10 @@ class ColorDot
         start += millis()-prevMillis;
         if (currentShape<shapeCount)
         {
-          shapes.add(new Rose(this));  
-          currentShape++;
           for (int i=0; i<currentShape; i++)
-          {
             ((Shape)shapes.get(i)).scaleUp();
-          }
+          shapes.add(createNewShape());  
+          currentShape++;
           if (currentShape+dots.size() <= shapeCount)
           {
             dots.add(new ColorDot());
@@ -81,6 +78,10 @@ class ColorDot
       prev = new Point(round(x), round(y));
     }
     pop();
+  }
+  
+  Shape createNewShape() {
+    return new Rose(this);
   }
 
   void shape(float x, float y, boolean hover) {
@@ -118,6 +119,11 @@ class RoseDot extends ColorDot
   {
     super(s);
   }
+  
+  Shape createNewShape()
+  {
+    return new Rose(this);
+  }
 
   void shape(float x, float y, boolean hover)
   {
@@ -149,6 +155,11 @@ class SpiroDot extends ColorDot
   {
     super(s);
     spiro = new Spiro(10, 20, 5, c);
+  }
+  
+  Shape createNewShape()
+  {
+    return new Spiro(this);
   }
   
   void shape(float x, float y, boolean hover)

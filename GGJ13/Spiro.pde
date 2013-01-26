@@ -13,6 +13,17 @@ class Spiro extends Shape
     p = a;
     c = ci;
   }
+  
+  Spiro(ColorDot src)
+  {
+    lr = ceil(dist(src.prev.x,src.prev.y,mouseX,mouseY));
+    lr -= lr % 5;
+    br = max(lr/5, floor(((sin(STEP*((SpiroDot)src).frame)/3)+.3)*lr));
+    br -= br % 5;
+    p = 60;//lr - br;
+    println(br+","+lr+","+p);
+    c = src.c;
+  }
 
   void draw()
   {
@@ -24,6 +35,9 @@ class Spiro extends Shape
     push();
     translate(HW, HH);
     zoom();
+    noFill();
+    stroke(c);
+    strokeWeight(3);
     beginShape();
     float b2, b1 = 1/(1-(br/lr));
     int i;
@@ -39,7 +53,7 @@ class Spiro extends Shape
       vertex(x, y);
       t += STEP;
     }
-    endShape(CLOSE);
+    endShape();
     pop();
   }
   

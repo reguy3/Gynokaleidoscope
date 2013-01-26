@@ -19,7 +19,7 @@ class Rose extends Shape
   Rose(ColorDot src)
   {
     petals = 2;
-    radius = floor(dist(mouseX, mouseY, HW, HH)/2);
+    radius = floor(dist(mouseX, mouseY, HW, HH));
     rot = atan2(mouseY-HH, mouseX-HW);
     c = src.c;
   }

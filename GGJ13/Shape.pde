@@ -2,7 +2,7 @@ class Shape
 {
   color c;
   float tscale=1,scale=1;
-  int scaleStep = 2; //amount to increase tscale by each zoom level
+  float scaleStep = 1.1; //amount to increase tscale by each zoom level
   
   Shape()
   {
