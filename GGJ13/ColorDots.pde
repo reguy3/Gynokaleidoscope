@@ -1,14 +1,14 @@
 ArrayList dots = new ArrayList();
 boolean dotSelected = false;
 color[] colors = {
-  color(100), 
-  color(225, 50, 50), 
-  color(50, 225, 50), 
-  color(50, 50, 225), 
+  //color(100), 
+  //color(225, 50, 50), 
+  //color(50, 225, 50), 
+  //color(50, 50, 225), 
   color(225, 225, 50), 
   color(225, 50, 225), 
   color(50, 225, 225), 
-  color(225)
+  //color(225)
 };
 class ColorDot
 {
@@ -19,7 +19,7 @@ class ColorDot
 
   ColorDot(int... s)
   {
-    c = colors[floor(random(8))];
+    c = colors[floor(random(colors.length))];
     if (s.length > 0)
       start = s[0];
     else
@@ -46,7 +46,7 @@ class ColorDot
           currentShape++;
           if (currentShape+dots.size() <= shapeLimit)
           {
-            dots.add(new ColorDot());
+            dots.add(createNewDot());
           }
           dots.remove(dots.indexOf(this));
         }
@@ -80,34 +80,32 @@ class ColorDot
     pop();
   }
 
-  Shape createNewShape() {
+  Shape createNewShape()
+  {
     return new Rose(this);
   }
 
-  void shape(float x, float y, boolean hover) {
-    int r = hover ? 20 : 16;
-    stroke(0);
-    strokeWeight(5);
-    noFill();
-    ellipse(x, y, r, r);
-    if (hover)
-      fill(c);
-    stroke(c);
-    strokeWeight(3);
-    ellipse(x, y, r, r);
+  void shape(float x, float y, boolean hover)
+  {
   }
 
-  void dragShape(float x, float y) {
-    stroke(0);
-    strokeWeight(5);
-    ellipse(x, y, 20, 20);
-    line(x, y, mouseX, mouseY);
-    fill(c);
-    stroke(c);
-    strokeWeight(3);
-    ellipse(x, y, 20, 20);
-    line(x, y, mouseX, mouseY);
+  void dragShape(float x, float y)
+  {
   }
+}
+
+ColorDot createNewDot()
+{
+  switch(floor(random(3)))
+  {
+  case 0:
+    return new RoseDot();
+  case 1:
+    return new SpiroDot();
+  case 2:
+    return new HyperDot();
+  }
+  return new RoseDot();
 }
 
 class RoseDot extends ColorDot
@@ -144,19 +142,8 @@ class RoseDot extends ColorDot
     strokeWeight(3);
     rose.pleaseDraw(4, 20, millis()/600f, x, y, c, 3);
     line(x, y, mouseX, mouseY);
-    push();
-    noStroke();
-    translate(mouseX, mouseY);
-    for (float i=0;i<TWO_PI;i+=TWO_PI/(frame/peelRate))
-    {
-      Point pos = new Point(ceil(16*cos(i)), ceil(16*sin(i)));
-      fill(0);
-      ellipse(pos.x, pos.y, 10, 10);
-      fill(c);
-      ellipse(pos.x, pos.y, 8, 8);
-    }
-    pop();
-    if (frame < 300) frame++;
+    peel(frame, peelRate, c);
+    if (frame < peelRate*10) frame++;
   }
 }
 
@@ -198,5 +185,61 @@ class SpiroDot extends ColorDot
     line(x, y, mouseX, mouseY);
     frame++;
   }
+}
+
+class HyperDot extends ColorDot
+{
+  Hypercycloid cycloid;
+  float peelRate = 60;
+  float frame = peelRate*2;
+
+  HyperDot(int... s)
+  {
+    super(s);
+    cycloid = new Hypercycloid(c);
+  }
+
+  Shape createNewShape()
+  {
+    return new Hypercycloid(this);
+  }
+
+  void shape(float x, float y, boolean hover)
+  {
+    cycloid.pleaseDraw(5, hover ? 32:26, millis()/600f, x, y, 0, 0);
+    cycloid.pleaseDraw(5, hover ? 30:24, millis()/600f, x, y, c, 0);
+  }
+
+  void dragShape(float x, float y)
+  {
+    stroke(0);
+    strokeWeight(5);
+    cycloid.pleaseDraw(5, 32, millis()/600f, x, y, 0, 0);
+    line(x, y, mouseX, mouseY);
+    fill(c);
+    stroke(c);
+    strokeWeight(3);
+    cycloid.pleaseDraw(5, 30, millis()/600f, x, y, c, 0);
+    line(x, y, mouseX, mouseY);
+    peel(frame, peelRate, c);
+    if (frame < peelRate*10) frame++;
+  }
+}
+
+void peel(float frame, float peelRate, color c)
+{
+  push();
+  noStroke();
+  translate(mouseX, mouseY);
+  float theta = atan2(mouseY-HH, mouseX-HW);
+  for (float i=0;i<TWO_PI;i+=TWO_PI/(frame/peelRate))
+  {
+    Point pos = new Point(ceil(16*cos(i+theta)), ceil(16*sin(i+theta)));
+    fill(0);
+    ellipse(pos.x, pos.y, 10, 10);
+    fill(c);
+    ellipse(pos.x, pos.y, 8, 8);
+  }
+  pop();
 }
 
