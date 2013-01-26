@@ -7,7 +7,8 @@ int R = 100;
 int r = 160;
 float P = 60;
 boolean pmousePressed = false;
-int shapeCount = 4;
+int shapeCount = 5;
+int shapeLimit = 16;
 int currentShape = 0;
 ArrayList shapes;
 
@@ -17,9 +18,9 @@ void setup()
   HW = width/2;
   HH = height/2;
   dots = new ArrayList();
-  for (byte i=0;i<4;i++)
+  for (byte i=0;i<shapeCount;i++)
     dots.add(new RoseDot(floor(random(10000000))));
-  shapes = new ArrayList(shapeCount);
+  shapes = new ArrayList(shapeLimit);
 }
 
 void draw()
@@ -44,26 +45,6 @@ float oscillation()
 {
   return sin(millis()/500f);
 }
-
-void keyPressed()
-{
-  if(key == ' ')
-    ((Shape)shapes.get(currentShape)).scaleUp();
-}
-
-Point click1 = null;
-//void mouseClicked()
-//{
-//  if(currentShape<shapeCount)
-//  {
-//    shapes.add(new Rose(4, floor(dist(mouseX, mouseY, HW, HH)), atan2(mouseY-HH, mouseX-HW), color(255, 0, 0)));  
-//    currentShape++;
-//    for(int i=0; i<currentShape; i++)
-//    {
-//      ((Shape)shapes.get(i)).scaleUp();
-//    }
-//  }
-//}
 
 void push()
 {

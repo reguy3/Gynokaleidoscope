@@ -38,13 +38,13 @@ class ColorDot
         selected = false;
         dotSelected = false;
         start += millis()-prevMillis;
-        if (currentShape<shapeCount)
+        if (currentShape<shapeLimit)
         {
           for (int i=0; i<currentShape; i++)
             ((Shape)shapes.get(i)).scaleUp();
           shapes.add(createNewShape());  
           currentShape++;
-          if (currentShape+dots.size() <= shapeCount)
+          if (currentShape+dots.size() <= shapeLimit)
           {
             dots.add(new ColorDot());
           }
