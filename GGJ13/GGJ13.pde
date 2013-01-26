@@ -6,6 +6,9 @@ int R = 100;
 int r = 160;
 float P = 60;
 boolean pmousePressed = false;
+int shapeCount = 4;
+int currentShape = 0;
+ArrayList shapes;
 
 void setup()
 {
@@ -15,6 +18,7 @@ void setup()
   dots = new ArrayList();
   for (byte i=0;i<4;i++)
     dots.add(new ColorDot(floor(random(10000000))));
+  shapes = new ArrayList(shapeCount);
 }
 
 void draw()
@@ -22,8 +26,8 @@ void draw()
   background(0);
   // Vignette
   // Draw layers
-  for (int i=0;i<roses.size();i++)
-    ((Rose)roses.get(i)).draw();
+  for (int i=0;i<shapes.size();i++)
+    ((Shape)shapes.get(i)).draw();
   // Draw dots
   for (int i=0;i<dots.size();i++)
     ((ColorDot)dots.get(i)).draw();
@@ -37,14 +41,22 @@ float oscillation()
 
 void keyPressed()
 {
-  if (key == ' ')
-    ((Rose)roses.get(0)).tscale *= 2;
+  if(key == ' ')
+    ((Shape)shapes.get(currentShape)).scaleUp();
 }
 
 Point click1 = null;
 void mouseClicked()
 {
-  roses.add(new Rose(4, floor(dist(mouseX, mouseY, HW, HH)), atan2(mouseY-HH, mouseX-HW), color(255, 0, 0)));
+  if(currentShape<shapeCount)
+  {
+    shapes.add(new Rose(4, floor(dist(mouseX, mouseY, HW, HH)), atan2(mouseY-HH, mouseX-HW), color(255, 0, 0)));  
+    currentShape++;
+    for(int i=0; i<currentShape; i++)
+    {
+      ((Shape)shapes.get(i)).scaleUp();
+    }
+  }
 }
 
 void push()
