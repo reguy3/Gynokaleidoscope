@@ -57,7 +57,7 @@ class ColorDot
     {
       prevMillis = millis();
       float t = (prevMillis-start)/3000f;
-      float x = 40*cos(t);
+      float x = 10*cos(t);
       float y = 60*sin(t);
       float d = dist(0, 0, x, y);
       float a = atan2(y, x)-(t/9);
