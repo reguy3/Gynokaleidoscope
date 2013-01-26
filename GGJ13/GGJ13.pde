@@ -37,24 +37,13 @@ float oscillation()
 
 void keyPressed()
 {
-  if(key == ' ')
+  if (key == ' ')
     ((Rose)roses.get(0)).tscale *= 2;
 }
 
 Point click1 = null;
 void mouseClicked()
 {
-  /*
-    float a2 = atan2(mouseY-HH, mouseX-HW);
-   float diff = abs(a1-a2);
-   int petals = 7;
-   float m = 3;
-   for(int i=petals;i<16;i++) {
-   if(m < diff%(TWO_PI/i)) {
-   m = diff%(TWO_PI/i);
-   petals = i;
-   }
-   }*/
   roses.add(new Rose(4, floor(dist(mouseX, mouseY, HW, HH)), atan2(mouseY-HH, mouseX-HW), color(255, 0, 0)));
 }
 
@@ -68,3 +57,4 @@ void pop()
   popStyle();
   popMatrix();
 }
+
