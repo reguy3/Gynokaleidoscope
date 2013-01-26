@@ -12,15 +12,23 @@ void setup()
   background(0);
   HW = width/2;
   HH = height/2;
+  dots = new ArrayList();
+  dots.add(new ColorDot());
+  dots.add(new ColorDot());
+  dots.add(new ColorDot());
+  dots.add(new ColorDot());
 }
 
 void draw()
 {
   background(0);
   // Vignette
+  // Draw layers
   for (int i=0;i<roses.size();i++)
     ((Rose)roses.get(i)).draw();
-  // Draw layers
+  // Draw dots
+  for (int i=0;i<dots.size();i++)
+    ((ColorDot)dots.get(i)).draw();
 }
 
 float oscillation()
@@ -51,3 +59,13 @@ void mouseClicked()
   roses.add(new Rose(4, floor(dist(mouseX, mouseY, HW, HH)), atan2(mouseY-HH, mouseX-HW), 0));
 }
 
+void push()
+{
+  pushMatrix();
+  pushStyle();
+}
+void pop()
+{
+  popStyle();
+  popMatrix();
+}

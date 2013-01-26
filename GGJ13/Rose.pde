@@ -10,21 +10,20 @@ class Rose extends Shape
 {
   int petals;
   float rot, radius;
-  Rose(int k, int r, float g, color c)
+  Rose(int k, int r, float g, color ci)
   {
     petals = k%2==0 ? k/2 : k;
     radius = r;
     rot = g;
-    f = color(255,0,0);
+    c = ci;
   }
 
   void draw()
   {
     radius += oscillation()*2;
-    pushMatrix();
-    pushStyle();
-    fill(color);
-    stroke(color);
+    push();
+    fill(c);
+    stroke(c);
     float t = 0;
     translate(HW, HH);
     rotate(rot);
@@ -45,7 +44,6 @@ class Rose extends Shape
       t += STEP;
     }
     endShape(CLOSE);
-    popStyle();
-    popMatrix();
+    pop();
   }
 }

@@ -8,21 +8,22 @@
 class Spiro extends Shape
 {
   float br, lr, p;
-  Spiro(float b, float l, float a)
+  Spiro(float b, float l, float a, color ci)
   {
     br = b;
     lr = l;
     p = a;
+    c = ci;
   }
 
   void draw()
   {
-    p += oscillation();
-    
+    p += oscillation();    
     float k = lr/br;
     float a = p/lr;
     float t = 0;
-    pushMatrix();
+    
+    push();
     translate(HW, HH);
     zoom();
     beginShape();
@@ -41,6 +42,6 @@ class Spiro extends Shape
       t += STEP;
     }
     endShape(CLOSE);
-    popMatrix();
+    pop();
   }
 }
