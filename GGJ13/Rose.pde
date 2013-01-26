@@ -8,6 +8,7 @@ class Rose extends Shape
 {
   int petals;
   float rot, radius;
+  float osc_offset = (float)Math.random()*2*PI;
   Rose(int k, int r, float g, color ci)
   {
     petals = k%2==0 ? k/2 : k;
@@ -25,7 +26,7 @@ class Rose extends Shape
 
   void draw()
   {
-    float currRadius = radius + oscillation()*10;
+    float currRadius = radius + oscillation(osc_offset)*10;
     push();
     fill(c);
     stroke(c);
