@@ -35,6 +35,11 @@ void draw()
   pmousePressed = mousePressed;
 }
 
+float oscillation(float osc_offset)
+{
+  return sin(millis()/500f+osc_offset);
+}
+
 float oscillation()
 {
   return sin(millis()/500f);
