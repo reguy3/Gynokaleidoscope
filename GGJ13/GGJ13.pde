@@ -5,6 +5,7 @@ float HW, HH;
 int R = 100;
 int r = 160;
 float P = 60;
+boolean pmousePressed = false;
 
 void setup()
 {
@@ -12,10 +13,8 @@ void setup()
   HW = width/2;
   HH = height/2;
   dots = new ArrayList();
-  dots.add(new ColorDot(floor(random(10000000))));
-  dots.add(new ColorDot(floor(random(10000000))));
-  dots.add(new ColorDot(floor(random(10000000))));
-  dots.add(new ColorDot(floor(random(10000000))));
+  for (byte i=0;i<4;i++)
+    dots.add(new ColorDot(floor(random(10000000))));
 }
 
 void draw()
@@ -28,6 +27,7 @@ void draw()
   // Draw dots
   for (int i=0;i<dots.size();i++)
     ((ColorDot)dots.get(i)).draw();
+  pmousePressed = mousePressed;
 }
 
 float oscillation()

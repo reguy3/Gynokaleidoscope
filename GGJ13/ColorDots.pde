@@ -1,12 +1,25 @@
 ArrayList dots = new ArrayList();
+boolean dotSelected = false;
+color[] colors = {
+  color(50), 
+  color(225, 50, 50), 
+  color(50, 225, 50), 
+  color(50, 50, 225), 
+  color(225, 225, 50), 
+  color(225, 50, 225), 
+  color(50, 225, 225), 
+  color(225)
+};
 class ColorDot
 {
   color c;
-  int start, type;
+  int start, type, prevMillis;
+  boolean selected = false;
+  Point prev;
 
   ColorDot(int... s)
   {
-    c = color(round(random(1))*200+55, round(random(1))*200+55, round(random(1))*200+55);
+    c = colors[floor(random(8))];
     type = floor(random(1)*4);
     if (s.length > 0)
       start = s[0];
@@ -17,26 +30,48 @@ class ColorDot
   void draw()
   {
     push();
-    translate(HW, HH);
-    float t = (millis()-start)/3000f;
-    rotate(t/50);
-    stroke(c);
-    strokeWeight(3);
-    float x = 60*cos(t);
-    float y = 80*sin(t);
-    float md = dist(HW, HH, mouseX, mouseY);
-    float ma = atan2(mouseY-HH, mouseX-HW)-(t/50);
-    float mx = md*cos(ma);
-    float my = md*sin(ma);
-    if(dist(x, y, mx, my) < 16)
+    if (selected)
     {
       fill(c);
-      ellipse(x, y, 20, 20);
+      stroke(c);
+      strokeWeight(3);
+      ellipse(prev.x, prev.y, 20, 20);
+      line(prev.x, prev.y, mouseX, mouseY);
+      if (!mousePressed)
+      {
+        selected = false;
+        dotSelected = false;
+        start += millis()-prevMillis;
+      }
     }
     else
     {
-      noFill();
-      ellipse(x, y, 16, 16);
+      prevMillis = millis();
+      float t = (prevMillis-start)/3000f;
+      float x = 60*cos(t);
+      float y = 80*sin(t);
+      float d = dist(0, 0, x, y);
+      float a = atan2(y, x)-(t/9);
+      x = d*cos(a)+HW;
+      y = d*sin(a)+HH;
+      stroke(c);
+      strokeWeight(3);
+      if (dist(x, y, mouseX, mouseY) < 16)
+      {
+        fill(c);
+        ellipse(x, y, 20, 20);
+        if (!dotSelected && !pmousePressed && mousePressed)
+        {
+          dotSelected = true;
+          selected = true;
+        }
+      }
+      else
+      {
+        noFill();
+        ellipse(x, y, 16, 16);
+      }
+      prev = new Point(round(x), round(y));
     }
     pop();
   }
