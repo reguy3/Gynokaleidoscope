@@ -51,4 +51,34 @@ class Rose extends Shape
     endShape(CLOSE);
     pop();
   }
+  void pleaseDraw(int petals, int radius, float rot, float cx, float cy, color c, int w)
+  { 
+    petals = petals%2 == 0 ? petals/2 : petals;
+    push();
+    fill(c);
+    stroke(c);
+    strokeWeight(w);
+    float t = 0;
+    translate(cx, cy);
+    rotate(rot);
+    zoom();
+    beginShape();
+    while (t <= TWO_PI)
+    {
+      float x = radius*(cos(petals*t)*sin(t));
+      float y = radius*(cos(petals*t)*cos(t));
+      curveVertex(x, y);
+      t += STEP;
+    }
+    for (byte i=0;i<3;i++)
+    {
+      float x = radius*(cos(petals*t)*sin(t));
+      float y = radius*(cos(petals*t)*cos(t));
+      curveVertex(x, y);
+      t += STEP;
+    }
+    endShape(CLOSE);
+    pop();
+  }
 }
+

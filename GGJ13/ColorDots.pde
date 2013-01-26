@@ -33,15 +33,7 @@ class ColorDot
     // DOT SELECTED BEHAVIOR
     if (selected)
     {
-      stroke(0);
-      strokeWeight(5);
-      ellipse(prev.x, prev.y, 20, 20);
-      line(prev.x, prev.y, mouseX, mouseY);
-      fill(c);
-      stroke(c);
-      strokeWeight(3);
-      ellipse(prev.x, prev.y, 20, 20);
-      line(prev.x, prev.y, mouseX, mouseY);
+      dragShape(prev.x, prev.y);
       if (!mousePressed)
       {
         selected = false;
@@ -55,7 +47,10 @@ class ColorDot
           {
             ((Shape)shapes.get(i)).scaleUp();
           }
-          dots.add(new ColorDot());
+          if (currentShape+dots.size() <= shapeCount)
+          {
+            dots.add(new ColorDot());
+          }
           dots.remove(dots.indexOf(this));
         }
       }
@@ -74,14 +69,7 @@ class ColorDot
 
       if (dist(x, y, mouseX, mouseY) < 16)
       {
-        stroke(0);
-        strokeWeight(5);
-        noFill();
-        ellipse(x, y, 20, 20);
-        fill(c);
-        stroke(c);
-        strokeWeight(3);
-        ellipse(x, y, 20, 20);
+        shape(x, y, true);
         if (!dotSelected && !pmousePressed && mousePressed)
         {
           dotSelected = true;
@@ -89,18 +77,93 @@ class ColorDot
         }
       }
       else
-      {
-        stroke(0);
-        strokeWeight(5);
-        noFill();
-        ellipse(x, y, 16, 16);
-        stroke(c);
-        strokeWeight(3);
-        ellipse(x, y, 16, 16);
-      }
+        shape(x, y, false);
       prev = new Point(round(x), round(y));
     }
     pop();
+  }
+
+  void shape(float x, float y, boolean hover) {
+    int r = hover ? 20 : 16;
+    stroke(0);
+    strokeWeight(5);
+    noFill();
+    ellipse(x, y, r, r);
+    if (hover)
+      fill(c);
+    stroke(c);
+    strokeWeight(3);
+    ellipse(x, y, r, r);
+  }
+
+  void dragShape(float x, float y) {
+    stroke(0);
+    strokeWeight(5);
+    ellipse(x, y, 20, 20);
+    line(x, y, mouseX, mouseY);
+    fill(c);
+    stroke(c);
+    strokeWeight(3);
+    ellipse(x, y, 20, 20);
+    line(x, y, mouseX, mouseY);
+  }
+}
+
+class RoseDot extends ColorDot
+{
+  int frame = 0;
+  Rose rose = new Rose(0, 0, 0, 0);
+
+  RoseDot(int... s)
+  {
+    super(s);
+  }
+
+  void shape(float x, float y, boolean hover)
+  {
+    int r = hover ? 20 : 16;
+    rose.pleaseDraw(4, r, millis()/600f, x, y, 0, hover ? 7 : 5);
+    rose.pleaseDraw(4, r, millis()/600f, x, y, c, 3);
+  }
+
+  void dragShape(float x, float y)
+  {
+    stroke(0);
+    strokeWeight(5);
+    rose.pleaseDraw(4, 20, millis()/600f, x, y, 0, 5);
+    line(x, y, mouseX, mouseY);
+    fill(c);
+    stroke(c);
+    strokeWeight(3);
+    rose.pleaseDraw(4, 20, millis()/600f, x, y, c, 3);
+    line(x, y, mouseX, mouseY);
+  }
+}
+
+class SpiroDot extends ColorDot
+{
+  int frame = 0;
+  Spiro spiro = new Spiro(0, 0, 0, 0);
+  
+  SpiroDot(int... s)
+  {
+    super(s);
+  }
+
+  void dragShape(float x, float y) {
+    //spiro.pleaseDraw();
+    stroke(0);
+    strokeWeight(5);
+    line(x, y, mouseX, mouseY);
+    strokeWeight(1);
+    fill(c);
+    float osc = sin(STEP*frame)/2+.5;
+    ellipse(x+(osc*(mouseX-x)), y+(osc*(mouseY-y)), 20, 20);
+    //spiro.pleaseDraw();
+    stroke(c);
+    strokeWeight(3);
+    line(x, y, mouseX, mouseY);
+    frame++;
   }
 }
 
