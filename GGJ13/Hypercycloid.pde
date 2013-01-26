@@ -1,0 +1,86 @@
+/**
+ * k = petals
+ * r = radius
+ * g = rotation
+ */
+//ArrayList roses = new ArrayList();
+class Hypercycloid extends Shape
+{
+  int petals;
+  float rot, radius;
+  float osc_offset = (float)Math.random()*2*PI;
+  Hypercycloid(int k, int r, float g, color ci)
+  {
+    petals = k%2==0 ? k/2 : k;
+    radius = r;
+    rot = g;
+    c = ci;
+  }
+  Hypercycloid(ColorDot src)
+  {
+    petals = (int)(Math.random()*10)+2;
+    radius = floor(dist(mouseX, mouseY, HW, HH)/2);
+    rot = atan2(mouseY-HH, mouseX-HW);
+    c = src.c;
+  }
+
+  void draw()
+  {
+    float currRadius = radius/2 + oscillation(osc_offset)*10;
+    push();
+    fill(c);
+    stroke(c);
+    float t = 0;
+    translate(HW, HH);
+    rotate(rot);
+    zoom();
+    beginShape();
+    while (t <= TWO_PI)
+    {
+      float x = currRadius*petals*cos(t)+currRadius*cos(petals*t);
+      float y = currRadius*petals*sin(t)-currRadius*sin(petals*t);
+      curveVertex(x, y);
+      t += STEP;
+    }
+    for (byte i=0;i<3;i++)
+    {
+      float x = currRadius*petals*cos(t)+currRadius*cos(petals*t);
+      float y = currRadius*petals*sin(t)-currRadius*sin(petals*t);
+      curveVertex(x, y);
+      t += STEP;
+    }
+    endShape(CLOSE);
+    pop();
+  }
+  void pleaseDraw(int petals, int radius, float rot, float cx, float cy, color c, int w)
+  { 
+    petals = 10;
+    push();
+    fill(c);
+    stroke(c);
+    strokeWeight(w);
+    float t = 0;
+    translate(cx, cy);
+    rotate(rot);
+    zoom();
+    beginShape();
+    radius = 1;
+    while (t <= TWO_PI)
+    {
+      float x = radius*petals*cos(t)+radius*cos(petals*t);
+      float y = radius*petals*sin(t)+radius*sin(petals*t);
+      curveVertex(x, y);
+      t += STEP;
+    }
+    for (byte i=0;i<3;i++)
+    {
+      float x = radius*petals*cos(t)+radius*cos(petals*t);
+      float y = radius*petals*sin(t)+radius*sin(petals*t);
+      curveVertex(x, y);
+      t += STEP;
+    }
+    endShape(CLOSE);
+    pop();
+  }
+}
+
