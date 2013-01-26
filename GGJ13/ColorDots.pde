@@ -43,6 +43,15 @@ class ColorDot
         selected = false;
         dotSelected = false;
         start += millis()-prevMillis;
+        if(currentShape<shapeCount)
+        {
+          shapes.add(new Rose(4, floor(dist(mouseX, mouseY, HW, HH)), atan2(mouseY-HH, mouseX-HW), color(c)));  
+          currentShape++;
+          for(int i=0; i<currentShape; i++)
+          {
+            ((Shape)shapes.get(i)).scaleUp();
+          }
+        }
       }
     }
     // ORBIT BEHAVIOR

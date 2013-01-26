@@ -46,18 +46,18 @@ void keyPressed()
 }
 
 Point click1 = null;
-void mouseClicked()
-{
-  if(currentShape<shapeCount)
-  {
-    shapes.add(new Rose(4, floor(dist(mouseX, mouseY, HW, HH)), atan2(mouseY-HH, mouseX-HW), color(255, 0, 0)));  
-    currentShape++;
-    for(int i=0; i<currentShape; i++)
-    {
-      ((Shape)shapes.get(i)).scaleUp();
-    }
-  }
-}
+//void mouseClicked()
+//{
+//  if(currentShape<shapeCount)
+//  {
+//    shapes.add(new Rose(4, floor(dist(mouseX, mouseY, HW, HH)), atan2(mouseY-HH, mouseX-HW), color(255, 0, 0)));  
+//    currentShape++;
+//    for(int i=0; i<currentShape; i++)
+//    {
+//      ((Shape)shapes.get(i)).scaleUp();
+//    }
+//  }
+//}
 
 void push()
 {
