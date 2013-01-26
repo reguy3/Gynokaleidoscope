@@ -20,7 +20,7 @@ void setup()
 
 void draw()
 {
-  //background(0);
+  background(0);
   // Vignette
   // Draw layers
   for (int i=0;i<roses.size();i++)
