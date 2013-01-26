@@ -1,5 +1,3 @@
-import krister.Ess.*;
-
 AudioChannel mainTheme;
 AudioChannel seWinChime;
 AudioChannel seChime1, seChime2, seChime3, seChime4, seChime5, seChime6, seChime7, seChime8;

@@ -1,4 +1,5 @@
 import java.awt.Point;
+import krister.Ess.*;
 
 static final float STEP = TWO_PI/50;
 float HW, HH;
