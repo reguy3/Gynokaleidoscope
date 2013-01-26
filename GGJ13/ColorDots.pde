@@ -143,23 +143,31 @@ class RoseDot extends ColorDot
 class SpiroDot extends ColorDot
 {
   int frame = 0;
-  Spiro spiro = new Spiro(0, 0, 0, 0);
+  Spiro spiro;
   
   SpiroDot(int... s)
   {
     super(s);
+    spiro = new Spiro(10, 20, 5, c);
+  }
+  
+  void shape(float x, float y, boolean hover)
+  {
+    spiro.pleaseDraw(x, y, millis()/600f, 10, 20, 5, 0, hover ? 7 : 5);
+    spiro.pleaseDraw(x, y, millis()/600f, 10, 20, 5, c, hover ? 5 : 3);
   }
 
-  void dragShape(float x, float y) {
-    //spiro.pleaseDraw();
+  void dragShape(float x, float y)
+  {
+    spiro.pleaseDraw(x, y, millis()/600f, 10, 20, 5, 0, 7);
     stroke(0);
     strokeWeight(5);
     line(x, y, mouseX, mouseY);
     strokeWeight(1);
     fill(c);
-    float osc = sin(STEP*frame)/2+.5;
+    float osc = sin(STEP*frame)/3+.5;
     ellipse(x+(osc*(mouseX-x)), y+(osc*(mouseY-y)), 20, 20);
-    //spiro.pleaseDraw();
+    spiro.pleaseDraw(x, y, millis()/600f, 10, 20, 5, c, 5);
     stroke(c);
     strokeWeight(3);
     line(x, y, mouseX, mouseY);

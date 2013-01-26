@@ -61,7 +61,6 @@ class Rose extends Shape
     float t = 0;
     translate(cx, cy);
     rotate(rot);
-    zoom();
     beginShape();
     while (t <= TWO_PI)
     {

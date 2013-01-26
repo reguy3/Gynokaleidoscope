@@ -42,4 +42,35 @@ class Spiro extends Shape
     endShape(CLOSE);
     pop();
   }
+  
+  void pleaseDraw(float cx, float cy, float rot, float br, float lr, float p, color c, int w)
+  {
+    float k = lr/br;
+    float a = p/lr;
+    float t = 0;
+    
+    push();
+    translate(cx, cy);
+    rotate(rot);
+    noFill();
+    stroke(c);
+    strokeWeight(w);
+    beginShape();
+    float b2, b1 = 1/(1-(br/lr));
+    int i;
+    for (i=1;i<30;i++)
+      if ((i*b1)%1 < .001)
+        break;
+    b1 *= i;
+
+    while (t <= TWO_PI*b1)
+    {
+      float x = br*((1-k)*cos(t)+a*k*cos(((1-k)/k)*t));//r*(cos(k*t)*sin(t));
+      float y = br*((1-k)*sin(t)+a*k*sin(((1-k)/k)*t));//r*(-cos(k*t)*cos(t));
+      curveVertex(x, y);
+      t += STEP;
+    }
+    endShape(CLOSE);
+    pop();
+  }
 }
