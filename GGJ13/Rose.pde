@@ -3,7 +3,7 @@
  * r = radius
  * g = rotation
  */
-ArrayList roses = new ArrayList();
+//ArrayList roses = new ArrayList();
 class Rose extends Shape
 {
   int petals;
