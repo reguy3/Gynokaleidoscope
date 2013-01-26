@@ -9,19 +9,18 @@ float P = 60;
 void setup()
 {
   size(800, 600);
-  background(0);
   HW = width/2;
   HH = height/2;
   dots = new ArrayList();
-  dots.add(new ColorDot());
-  dots.add(new ColorDot());
-  dots.add(new ColorDot());
-  dots.add(new ColorDot());
+  dots.add(new ColorDot(floor(random(10000000))));
+  dots.add(new ColorDot(floor(random(10000000))));
+  dots.add(new ColorDot(floor(random(10000000))));
+  dots.add(new ColorDot(floor(random(10000000))));
 }
 
 void draw()
 {
-  background(0);
+  //background(0);
   // Vignette
   // Draw layers
   for (int i=0;i<roses.size();i++)
