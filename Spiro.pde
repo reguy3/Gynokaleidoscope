@@ -5,7 +5,7 @@
  * lr = little radius
  * p = arm length
  */
-class Spiro
+class Spiro extends Shape
 {
   float br, lr, p;
   Spiro(float b, float l, float a)
@@ -21,10 +21,10 @@ class Spiro
     
     float k = lr/br;
     float a = p/lr;
-
-    pushMatrix();
     float t = 0;
+    pushMatrix();
     translate(HW, HH);
+    zoom();
     beginShape();
     float b2, b1 = 1/(1-(br/lr));
     int i;

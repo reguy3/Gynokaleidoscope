@@ -6,12 +6,10 @@
  * g = rotation
  */
 ArrayList roses = new ArrayList();
-class Rose
+class Rose extends Shape
 {
   int petals;
-  color f;
   float rot, radius;
-  float tscale = 1,scale = 1;
   Rose(int k, int r, float g, color c)
   {
     petals = k%2==0 ? k/2 : k;
@@ -25,13 +23,12 @@ class Rose
     radius += oscillation()*2;
     pushMatrix();
     pushStyle();
-    fill(f);
-    stroke(f);
+    fill(color);
+    stroke(color);
     float t = 0;
     translate(HW, HH);
     rotate(rot);
-    scale(scale);
-    scale += (tscale-scale)/5;
+    zoom();
     beginShape();
     while (t <= TWO_PI)
     {

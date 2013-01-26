@@ -12,29 +12,15 @@ void setup()
   background(0);
   HW = width/2;
   HH = height/2;
-  //rose(8, 300, 12);
 }
 
 void draw()
 {
   background(0);
-  stroke(255);
-  //fill(255);
-  strokeWeight(3);
-  //spiro(R, r, P);
-  noFill();
-  stroke(255, 100, 100);
-  ellipse(HW, HH, R, R);
-  stroke(100, 255, 100);
-  ellipse(HW, HH, r, r);
-  stroke(100, 100, 255);
-  ellipse(HW, HH, P, P);
-  if (click1 != null)
-  {
-    ellipse(click1.x, click1.y, 6, 6);
-  }
+  // Vignette
   for (int i=0;i<roses.size();i++)
     ((Rose)roses.get(i)).draw();
+  // Draw layers
 }
 
 float oscillation()
