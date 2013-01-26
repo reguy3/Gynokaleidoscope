@@ -19,7 +19,7 @@ void setup()
   HH = height/2;
   dots = new ArrayList();
   for (byte i=0;i<shapeCount;i++)
-    dots.add(new RoseDot(floor(random(10000000))));
+    dots.add(new HyperDot(floor(random(1000000000))));
   shapes = new ArrayList(shapeLimit);
 }
 

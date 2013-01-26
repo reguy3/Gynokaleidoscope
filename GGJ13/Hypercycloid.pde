@@ -18,10 +18,14 @@ class Hypercycloid extends Shape
   }
   Hypercycloid(ColorDot src)
   {
-    petals = (int)(Math.random()*10)+2;
+    petals = floor(((HyperDot) src).frame/((HyperDot) src).peelRate);
     radius = floor(dist(mouseX, mouseY, HW, HH)/2);
     rot = atan2(mouseY-HH, mouseX-HW);
     c = src.c;
+  }
+  Hypercycloid(color ci)
+  {
+    c = ci;
   }
 
   void draw()
@@ -52,9 +56,11 @@ class Hypercycloid extends Shape
     endShape(CLOSE);
     pop();
   }
-  void pleaseDraw(int petals, int radius, float rot, float cx, float cy, color c, int w)
-  { 
-    petals = 10;
+  
+  void pleaseDraw(int petals, float radius, float rot, float cx, float cy, color c, int w)
+  {
+    radius /= 8;
+    petals --;
     push();
     fill(c);
     stroke(c);
@@ -64,19 +70,18 @@ class Hypercycloid extends Shape
     rotate(rot);
     zoom();
     beginShape();
-    radius = 1;
     while (t <= TWO_PI)
     {
       float x = radius*petals*cos(t)+radius*cos(petals*t);
-      float y = radius*petals*sin(t)+radius*sin(petals*t);
-      curveVertex(x, y);
+      float y = radius*petals*sin(t)-radius*sin(petals*t);
+      vertex(x, y);
       t += STEP;
     }
     for (byte i=0;i<3;i++)
     {
       float x = radius*petals*cos(t)+radius*cos(petals*t);
-      float y = radius*petals*sin(t)+radius*sin(petals*t);
-      curveVertex(x, y);
+      float y = radius*petals*sin(t)-radius*sin(petals*t);
+      vertex(x, y);
       t += STEP;
     }
     endShape(CLOSE);
