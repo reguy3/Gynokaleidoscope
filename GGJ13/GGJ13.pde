@@ -6,11 +6,14 @@ float HW, HH;
 int R = 100;
 int r = 160;
 float P = 60;
+String levelFile = "levels.txt";
 boolean pmousePressed = false;
 int shapeCount = 5;
 int shapeLimit = 16;
 int currentShape = 0;
 ArrayList shapes;
+ArrayList levels;
+
 
 void setup() 
 {
@@ -129,5 +132,16 @@ void pop()
 {
   popStyle();
   popMatrix();
+}
+
+void createLevels()
+{
+  levels = new ArrayList();
+  String lines[] = loadStrings(levelFile);
+  for (int i=0; i<lines.length; i++)
+  {
+     String properties[] = split(lines[0], " % ");
+     levels.add(new Level(Integer.parseInt(properties[0]), properties[1], properties[2]));
+  }
 }
 
