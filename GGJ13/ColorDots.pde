@@ -125,7 +125,7 @@ ColorDot createNewDot()
     c = new color[1];
     c[0] = colorIndex(op1.c) == colorIndex(op2.c)
       ? op1.c
-      : colors[3 - colorIndex(op1.c) - colorIndex(op2.c)];
+        : colors[3 - colorIndex(op1.c) - colorIndex(op2.c)];
     println("OP1: "+op1.TYPE+" "+colorIndex(op1.c));
     println("OP2: "+op2.TYPE+" "+colorIndex(op2.c));
     println("NEW: "+type+" "+colorIndex(c[0]));
@@ -134,17 +134,30 @@ ColorDot createNewDot()
   else {
     type = floor(random(3));
   }
-  
+
   switch(type)
   {
-  case 0:
+  case ROSE:
     return new RoseDot((color[]) c);
-  case 1:
+  case SPIRO:
     return new SpiroDot((color[]) c);
-  case 2:
+  case HYPER:
     return new HyperDot((color[]) c);
   }
   return new RoseDot((color[]) c);
+}
+ColorDot createNewDot(byte type, byte c)
+{
+  color[] ca = {colors[c]};
+  switch(type) {
+  case ROSE:
+    return new RoseDot(ca);
+  case SPIRO:
+    return new SpiroDot(ca);
+  case HYPER:
+    return new HyperDot(ca);
+  }
+  return new RoseDot(ca);
 }
 
 class RoseDot extends ColorDot

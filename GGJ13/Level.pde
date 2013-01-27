@@ -5,7 +5,7 @@ void createLevels()
   for (int i=0;i<lines.length;i++)
   {
     String[] data = lines[i].split("\t");
-    levels.add(new Level(i, data[1], int(data[0])));
+    levels.add(new Level(i, data[1], int(data[0]), subset(data, 2)));
   }
 }
 
@@ -16,14 +16,17 @@ class Level
   String audioFile;
   boolean hasSound = false;
   boolean displayedText = false;
-  
+  ColorDot[] set;
 
-  public Level (int _levelNum, String _storyText, int bpm)
+  public Level (int _levelNum, String _storyText, int bpm, String[] dots)
   {
     levelNum = _levelNum;
     storyText = _storyText;
     tempo = bpm;
     audioFile = "audio/level_"+levelNum+".mp3";
+    set = new ColorDot[dots.length];
+    for(int i=0;i<dots.length;i++)
+      set[i] = createNewDot(int(dots[i][0]), int(dots[i][1]));
   }
 
 
