@@ -1,9 +1,9 @@
-100	Birds of a feather flock together	00	00	00
-080	Practice makes perfect	00	00	01	01	01
-100	Level2 is the best level	00	01	02
-100	No, level3 is the best level	00	00	00	01	02
-100	Level4 is the 5th level because we start at 0!	01	01	11	11	11
-100	I'm going to level with you: this is level 5.	10	11	12	01	02	
-100	Level VI: Return of the Jedi	02	12	22
-100	Lucky number s7even	20	21	22	00	01
-100	Ate. Level Ate.	22	11	00	22	20
+100	Make three shapes.	00	00	00
+080	Three of the same color.	00	00	01	01	01
+100	Or three different colors.	00	01	02
+100	Choose same or different.	00	00	00	01	02
+100	Match 3 same shapes.	01	01	11	11	11
+100	Different colors, same shape.	10	11	12	01	02
+100	3 different shapes	02	12	22
+100	All blue spires or all blue shapes.	22	22	22	12	02
+100	Choose: all different or all spires.	22	11	00	22	20
