@@ -10,6 +10,7 @@ int shapeLimit = 16;
 int currentShape = 0;
 ArrayList shapes;
 ArrayList levels;
+int tInit = 0;
 Level currentLevel;
 
 void setup() 
@@ -21,10 +22,10 @@ void setup()
   currentLevel = (Level)(levels.get(0));
   dots = new ArrayList();
   for (byte i=0;i<shapeCount;i++)
-    dots.add(createNewDot(floor(random(1000000000))));
+    dots.add(createNewDot());
   shapes = new ArrayList(shapeLimit);
   unitTesting();
-  
+  textFont(createFont("Arial", 48));
   //setupSound();
   //playMainTheme();
 }
@@ -40,6 +41,7 @@ void draw()
   for (int i=0;i<dots.size();i++)
     ((ColorDot)dots.get(i)).draw();
   pmousePressed = mousePressed;
+  currentLevel.levelText();
 }
 
 float oscillation(float osc_offset)

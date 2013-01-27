@@ -102,6 +102,8 @@ class Spiro extends Shape
           break;
       b1 *= i;
   
+      //println("SPIRO LOOPS: "+b1);
+  
       while (t <= TWO_PI*b1)
       {
         float x = br*((1-k)*cos(t)+a*k*cos(((1-k)/k)*t));//r*(cos(k*t)*sin(t));

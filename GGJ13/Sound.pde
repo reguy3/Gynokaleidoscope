@@ -12,7 +12,7 @@ void setupSound()
   Ess.start(this);
 
   // load background songs into new AudioChannels
-  mainTheme = new AudioChannel("MotherNodeTheme.mp3");
+  mainTheme = new AudioChannel("Gynacalypso.mp3");
   
 //  // load Chime sound effects
 //  seChime1 = new AudioChannel("Chime1.mp3");

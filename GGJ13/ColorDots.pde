@@ -9,24 +9,26 @@ color[] colors = {
   //*/ 
   //color(225, 225, 50), 
   //color(225, 50, 225), 
-  color(50, 225, 225),
+  color(50, 225, 225), 
   //*/ 
   //color(225)
 };
 class ColorDot
 {
   color c;
+  float s = 0f;
   int start, prevMillis;
   boolean selected = false;
   Point prev;
+  int TYPE;
 
-  ColorDot(int... s)
+  ColorDot(color... ci)
   {
-    c = colors[floor(random(colors.length))];
-    if (s.length > 0)
-      start = s[0];
+    if (ci.length > 0)
+      c = ci[0];
     else
-      start = millis();
+      c = colors[floor(random(colors.length))];
+    start = floor(random(sq(millis())));
   }
 
   void draw()
@@ -58,16 +60,20 @@ class ColorDot
     // ORBIT BEHAVIOR
     else
     {
+      push();
+      translate(HW, HH);
+      scale(s);
+      s = min(1, s+.02);
       prevMillis = millis();
       float t = (prevMillis-start)/3000f;
-      float x = 10*cos(t);
-      float y = 60*sin(t);
+      float x = 10*cos(t)/s;
+      float y = 60*sin(t)/s;
       float d = dist(0, 0, x, y);
       float a = atan2(y, x)-(t/9);
-      x = d*cos(a)+HW;
-      y = d*sin(a)+HH;
+      x = d*cos(a);
+      y = d*sin(a);
 
-      if (dist(x, y, mouseX, mouseY) < 16)
+      if (s == 1 && dist(x, y, mouseX-HW, mouseY-HH) < 16)
       {
         shape(x, y, true);
         if (!dotSelected && !pmousePressed && mousePressed)
@@ -78,14 +84,15 @@ class ColorDot
       }
       else
         shape(x, y, false);
-      prev = new Point(round(x), round(y));
+      pop();
+      prev = new Point(round(x+HW), round(y+HH));
     }
     pop();
   }
 
   Shape createNewShape()
   {
-    return new Rose(ceil(random(9))+1, 200, 0, colors[floor(random(3))]);
+    return new Rose(ceil(random(7))+3, 200, 0, colors[floor(random(3))]);
   }
 
   void shape(float x, float y, boolean hover)
@@ -97,18 +104,43 @@ class ColorDot
   }
 }
 
-ColorDot createNewDot(int... s)
+ColorDot createNewDot()
 {
-  switch(floor(random(3)))
+  color[] c = new color[0];
+  int type;
+  if (dots.size() > 1)
+  {
+    int j, i = floor(random(dots.size()));
+    do {
+      j = floor(random(dots.size()));
+    } 
+    while (j == i);
+    ColorDot op1 =(ColorDot) dots.get(i);
+    ColorDot op2 =(ColorDot) dots.get(j);
+    type = op1.TYPE == op2.TYPE
+      ? op1.TYPE
+      : 3 - op1.TYPE - op2.TYPE;
+    c = new color[1];
+    c[0] = colorIndex(op1.c) == colorIndex(op2.c)
+      ? op1.c
+      : colors[3 - colorIndex(op1.c) - colorIndex(op2.c)];
+    //println("Type: "+type);
+    //println("Color:"+colorIndex(c[0]));
+  } 
+  else {
+    type = floor(random(3));
+  }
+  
+  switch(type)
   {
   case 0:
-    return new RoseDot(s);
+    return new RoseDot((color[]) c);
   case 1:
-    return new SpiroDot(s);
+    return new SpiroDot((color[]) c);
   case 2:
-    return new HyperDot(s);
+    return new HyperDot((color[]) c);
   }
-  return new RoseDot(s);
+  return new RoseDot((color[]) c);
 }
 
 class RoseDot extends ColorDot
@@ -117,9 +149,9 @@ class RoseDot extends ColorDot
   float frame = peelRate * 2;
   Rose rose = new Rose(0, 0, 0, 0);
 
-  RoseDot(int... s)
+  RoseDot(color... ci)
   {
-    super(s);
+    TYPE = 0;
   }
 
   Shape createNewShape()
@@ -153,12 +185,11 @@ class RoseDot extends ColorDot
 class SpiroDot extends ColorDot
 {
   int frame = 0;
-  Spiro spiro;
+  Spiro spiro = new Spiro(10, 20, 5, c);
 
-  SpiroDot(int... s)
+  SpiroDot(color... ci)
   {
-    super(s);
-    spiro = new Spiro(10, 20, 5, c);
+    TYPE = 1;
   }
 
   Shape createNewShape()
@@ -192,14 +223,13 @@ class SpiroDot extends ColorDot
 
 class HyperDot extends ColorDot
 {
-  Hypercycloid cycloid;
+  Hypercycloid cycloid = new Hypercycloid(color(0));
   float peelRate = 60;
   float frame = peelRate*2;
 
-  HyperDot(int... s)
+  HyperDot(color... ci)
   {
-    super(s);
-    cycloid = new Hypercycloid(c);
+    TYPE = 2;
   }
 
   Shape createNewShape()
