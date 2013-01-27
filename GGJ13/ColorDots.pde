@@ -72,6 +72,7 @@ class ColorDot
             else
             {
               println("FAIL");
+              currentLevel.displayedText = false;
             }
             dots = currentLevel.set();
             for (int i=0;i<inPlay.size();i++)
