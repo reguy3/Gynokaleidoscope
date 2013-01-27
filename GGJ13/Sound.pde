@@ -1,11 +1,13 @@
 AudioChannel mainTheme;
 AudioChannel seLevWin, seLevFail;
 AudioChannel seGrow1, seGrow2, seGrow3, seGrow4;
-AudioChannel seHalfHeart1, seHalfHeart2, seWholeHeart;
+AudioChannel seHalfHeart1, seHalfHeart2, seFullHeart;
 
 
 int growCount = 0;
 boolean dir = true;
+boolean beatCheck = true;
+int osc = 1000;
 
 void setupSound()
 {
@@ -24,6 +26,11 @@ void setupSound()
   seGrow2 = new AudioChannel("Grow2.mp3");
   seGrow3 = new AudioChannel("Grow3.mp3");
   seGrow4 = new AudioChannel("Grow4.mp3");
+  
+  seHalfHeart1 = new AudioChannel("HalfHeart1.mp3");
+  seHalfHeart2 = new AudioChannel("HalfHeart2.mp3");
+  seFullHeart = new AudioChannel("WholeHeart.mp3");
+  seFullHeart.gain(5);
 
 }
 
@@ -36,7 +43,7 @@ void setupSound()
 void playMainTheme()
 {
   //println("main theme");
-  mainTheme.gain(5);
+  mainTheme.gain(-5);
   mainTheme.play(Ess.FOREVER);
 }
 
@@ -105,6 +112,24 @@ void playGrow()
   }
 }
 
+void playWholeHeart()
+{
+   seFullHeart.play(); 
+}
+
+void soundLoop()
+{
+  if (millis()%osc <= 100)
+  {
+    if(beatCheck)
+    {
+      beatCheck = false;
+      playWholeHeart();
+    }
+  }
+  else
+    beatCheck = true;
+}
 
 void stopAllSE()
 {
@@ -121,7 +146,6 @@ void stopAllSE()
   if (seLevFail.state == Ess.PLAYING)
     seLevFail.stop();
 }
-
 
 
 /*
