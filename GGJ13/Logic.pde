@@ -1,3 +1,5 @@
+ArrayList inPlay = new ArrayList();
+
 boolean isSet(Shape op1, Shape op2, Shape op3, boolean petals)
 {
   println(op1.TYPE);

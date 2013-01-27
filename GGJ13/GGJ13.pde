@@ -2,10 +2,6 @@ import java.awt.Point;
 import krister.Ess.*;
 
 static final float STEP = TWO_PI/50;
-static final int ROSE = 0;
-static final int HYPER = 1;
-static final int SPIRO = 2;
-
 float HW, HH;
 String levelFile = "levels.txt";
 boolean pmousePressed = false;
@@ -16,6 +12,8 @@ ArrayList shapes;
 ArrayList levels;
 int tInit = 0;
 Level currentLevel;
+int backgrounds = 9; //number of images
+PImage[] bgArray;
 
 void setup() 
 {
@@ -23,20 +21,21 @@ void setup()
   HW = width/2;
   HH = height/2;
   createLevels();
-  currentLevel = (Level)(levels.get(0));
-  dots = new ArrayList();
-  for (byte i=0;i<shapeCount;i++)
-    dots.add(createNewDot());
+  currentLevel = (Level)(levels.get(1));
+  dots = currentLevel.set();
   shapes = new ArrayList(shapeLimit);
   unitTesting();
   textFont(createFont("Arial", 48));
+  bgArray = new PImage[backgrounds];
+  for(int i=0;i<backgrounds;i++)
+    bgArray[i] = loadImage(i+".jpg");
   //setupSound();
   //playMainTheme();
 }
 
 void draw()
 {
-  background(0);
+  background(bgArray[currentLevel.bg]);
   // Vignette
   // Draw layers
   for (int i=0;i<shapes.size();i++)
