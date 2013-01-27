@@ -35,17 +35,5 @@ class Shape
     tscale *= scaleStep;
     if (oc == 0) oc = c;
   }
-
-  void alphaCalc()
-  {
-    /*
-    if(scale < 3)
-     alpha = 255;
-     else if(scale > 0 && 25*scale<255)
-     alpha = 255-25*(int)scale;
-     else
-     alpha=0; //*/    alpha = 255;
-    //System.out.println("Scale: " + scale + " 25Scale: " + scale*25 + " Alpha = " + alpha);
-  }
 }
 

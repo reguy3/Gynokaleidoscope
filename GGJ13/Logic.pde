@@ -2,10 +2,7 @@ ArrayList inPlay = new ArrayList();
 
 boolean isSet(Shape op1, Shape op2, Shape op3, boolean petals)
 {
-  println(op1.TYPE);
-  println(op2.TYPE);
-  println(op3.TYPE);
-  return ((colorIndex(op1.c)+colorIndex(op2.c)+colorIndex(op3.c))%3 == 0)
+  return ((colorIndex(op1.oc)+colorIndex(op2.oc)+colorIndex(op3.oc))%3 == 0)
   && ((op1.TYPE + op2.TYPE + op3.TYPE)%3 == 0)
   && (!petals || ((op1.petals==op2.petals && op2.petals==op3.petals && op1.petals==op3.petals)
   || (op1.petals!=op2.petals && op2.petals!=op3.petals && op1.petals!=op3.petals)));
@@ -16,7 +13,7 @@ int colorIndex(color c)
   for(int i=0;i<colors.length;i++)
     if(colorMatch(colors[i], c))
       return i;
-      println(" - nope");
+  println(" - nope");
   return -1;
 }
 
@@ -29,85 +26,87 @@ boolean colorMatch(color op1, color op2)
 
 color darken(color c, float s)
 {
-  println("D: "+s);
+  s = sqrt(s);
+  if(s <= 1) return c;
+  //println("D: "+s);
   float r = c >> 16&255;
   float g = c >> 8 &255;
   float b = c &255;
-  return color(r/s, g/s, b/s);
+  return color(r/s, g/s, b/s, 255/s);
 }
 
 void unitTesting()
-{  
-  // UNIT TESTING
+{
+  println(colorIndex(colors[1]));
   /*
   println(isSet(
-    new Hypercycloid(0,0,0,colors[0]),
-    new Rose(0,0,0,colors[0]),
-    new Hypercycloid(0,0,0,colors[0]),
+    new Hypercycloid(colors[0]),
+    new Rose(colors[0]),
+    new Hypercycloid(colors[0]),
     false
   ));
   // true */
   /*
   println(isSet(
-    new Hypercycloid(0,0,0,colors[0]),
-    new Rose(0,0,0,colors[0]),
-    new Hypercycloid(0,0,0,colors[1]),
+    new Hypercycloid(colors[0]),
+    new Rose(colors[0]),
+    new Hypercycloid(colors[1]),
     false
   ));
   // false */
   /*
   println(isSet(
-    new Hypercycloid(0,0,0,colors[0]),
-    new Rose(0,0,0,colors[1]),
-    new Hypercycloid(0,0,0,colors[2]),
+    new Hypercycloid(colors[0]),
+    new Rose(colors[1]),
+    new Hypercycloid(colors[2]),
     false
   ));
   // true */
   /*
   println(isSet(
-    new Rose(0,0,0,colors[0]),
-    new Rose(0,0,0,colors[1]),
-    new Rose(0,0,0,colors[2]),
+    new Rose(colors[0]),
+    new Rose(colors[1]),
+    new Rose(colors[2]),
     false
   ));
   // true */
   /*
   println(isSet(
-    new Rose(0,0,0,colors[0]),
-    new Rose(0,0,0,colors[1]),
-    new Rose(0,0,0,colors[1]),
+    new Rose(colors[0]),
+    new Rose(colors[1]),
+    new Rose(colors[1]),
     false
   ));
   // false */
   /*
   println(isSet(
-    new Rose(3,0,0,colors[0]),
-    new Rose(4,0,0,colors[1]),
-    new Rose(5,0,0,colors[2]),
+    new Rose(colors[0]),
+    new Rose(colors[1]),
+    new Rose(colors[2]),
     true
   ));
   // true */
   /*
   println(isSet(
-    new Rose(3,0,0,colors[0]),
-    new Hypercycloid(5,0,0,colors[1]),
-    new Rose(4,0,0,colors[2]),
+    new Rose(colors[0]),
+    new Hypercycloid(colors[1]),
+    new Rose(colors[2]),
     false
   ));
   // false */
   /*
   println(isSet(
-    new Rose(3,0,0,colors[0]),
-    new Rose(3,0,0,colors[1]),
-    new Rose(3,0,0,colors[2]),
+    new Rose(colors[0]),
+    new Rose(colors[1]),
+    new Rose(colors[2]),
     true
   ));
   // true */
   /*
   println(isSet(
-    new Rose(3,0,0,colors[0]),
-    new Rose(4,0,0,colors[1]),
-    new Rose(4,0,0,colors[2]),
+    new Rose(colors[0]),
+    new Rose(colors[1]),
+    new Rose(colors[2]),
     true
   ));
   // false */

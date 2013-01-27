@@ -87,7 +87,6 @@ class Spiro extends Shape
     translate(centX, centY);
     zoom();
     noFill();
-    alphaCalc();
     stroke(c, alpha);
     strokeWeight(3);
     beginShape();
