@@ -16,23 +16,28 @@ class Level
   String audioFile;
   boolean hasSound = false;
   boolean displayedText = false;
-  ArrayList set;
+  String[] dots;
 
-  public Level (int _levelNum, String _storyText, int bpm, String[] dots)
+  public Level (int _levelNum, String _storyText, int bpm, String[] _dots)
   {
     levelNum = _levelNum;
     storyText = _storyText;
     tempo = bpm;
     audioFile = "audio/level_"+levelNum+".mp3";
-    set = new ArrayList(dots.length);
+    dots = _dots;
+  }
+
+  ArrayList set()
+  {
+    ArrayList set = new ArrayList(dots.length);
     for (int i=0;i<dots.length;i++)
     {
       //println("Dot: " + dots[i].charAt(0) +" "+ dots[i].charAt(1)); 
       //println(parseInt(dots[i].charAt(0)+""));
       set.add(createNewDot(parseInt(dots[i].charAt(0)+""), parseInt(dots[i].charAt(1)+"")));
     }
+    return set;
   }
-
 
   void levelText() {
     textAlign(CENTER);

@@ -57,9 +57,22 @@ class ColorDot
           {
             if (isSet(((Shape) inPlay.get(0)), ((Shape) inPlay.get(1)), ((Shape) inPlay.get(2)), currentLevel.levelNum > 10))
             {
-              currentLevel = ((Level) levels.get(currentLevel.levelNum+1));
+              int nextLevel = currentLevel.levelNum+1;
+              if (nextLevel == levels.size())
+              {
+                // YOU WIN!
+              }
+              else 
+              {
+                currentLevel = ((Level) levels.get(nextLevel));
+                shapeCount = currentLevel.dots.length;
+              }
             }
-            dots = currentLevel.set;
+            else
+            {
+              println("FAIL");
+            }
+            dots = currentLevel.set();
             for (int i=0;i<inPlay.size();i++)
             {
               ((Shape) inPlay.get(i)).scaleUp();
@@ -82,7 +95,7 @@ class ColorDot
       push();
       translate(HW, HH);
       scale(s);
-      s = min(1, s+.02);
+      s = min(1, s+.1);
       prevMillis = millis();
       float t = (prevMillis-start)/3000f;
       float x = 10*cos(t)/s;
@@ -99,10 +112,10 @@ class ColorDot
         {
           dotSelected = true;
           int index = dots.indexOf(this);
-          for(int i=index;i<dots.size();i++)
+          for (int i=index;i<dots.size();i++)
           {
             ColorDot di = (ColorDot) dots.get(i);
-            if(s == 1 && dist(di.prev.x, di.prev.y, mouseX, mouseY) < 16)
+            if (s == 1 && dist(di.prev.x, di.prev.y, mouseX, mouseY) < 16)
               index = i;
           }
           ((ColorDot) dots.get(index)).selected = true;
