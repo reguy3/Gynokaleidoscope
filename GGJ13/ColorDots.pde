@@ -56,7 +56,7 @@ class ColorDot
           inPlay.add(newShape);
           if (inPlay.size() == 3)
           {
-            if (isSet(((Shape) inPlay.get(0)), ((Shape) inPlay.get(1)), ((Shape) inPlay.get(2)), currentLevel.levelNum > 10))
+            if (isSet(((Shape) inPlay.get(0)), ((Shape) inPlay.get(1)), ((Shape) inPlay.get(2)), false))
             {
               int nextLevel = currentLevel.levelNum+1;
               sfade = fade;
@@ -64,9 +64,17 @@ class ColorDot
               bgPrev = bgCurr;
               bgCurr = bgNext;
               bgNext = bgArray[nextLevel];
-              if (nextLevel == levels.size())
+              if (nextLevel == 2)//levels.size())
               {
                 // YOU WIN!
+                for(int i=0;i<shapes.size();i++)
+                {
+                  ((Shape) shapes.get(i)).tscale = 2.5 - i*.2;
+                  println(2.5-i*.1);
+                }
+                inPlay = new ArrayList();
+                return;
+                //mode = END;
               }
               else 
               {

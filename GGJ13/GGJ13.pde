@@ -6,6 +6,11 @@ static final int ROSE = 0;
 static final int HYPER = 1;
 static final int SPIRO = 2;
 
+int mode = 1;
+static final int TITLE = 0;
+static final int GAME = 1;
+static final int END = 2;
+
 float HW, HH;
 String levelFile = "levels.txt";
 boolean pmousePressed = false;
@@ -21,7 +26,7 @@ PImage[] bgArray;
 
 void setup() 
 {
-  size(1600, 1200);
+  size(800, 600);
   HW = width/2;
   HH = height/2;
   createLevels();
@@ -31,7 +36,7 @@ void setup()
   unitTesting();
   textFont(createFont("Arial", 48));
   bgArray = new PImage[backgrounds];
-  for(int i=0;i<backgrounds;i++)
+  for (int i=0;i<backgrounds;i++)
     bgArray[i] = loadImage(i+".jpg");
   bgPrev = bgArray[0];
   bgCurr = bgArray[0];
@@ -44,35 +49,57 @@ PImage bgPrev, bgCurr, bgNext;
 float tfade = 255, fade = 255, sfade = 0, fadeLength = 10;
 void draw()
 {
-  // Background, next level
-  background(bgNext);
-  // Faded current level
-  tfade = (3-inPlay.size())*(255/3);
-  fade += (tfade - fade) / fadeLength;
-  sfade -= sfade < 5 ? sfade : sfade/fadeLength;
-  println(sfade);
-  pushMatrix();
-  tint(255, fade);
-  image(bgCurr,0,0);
-  if(sfade>0 && currentLevel.levelNum > 0)
+  switch(mode)
   {
-    tint(255, sfade);
-    image(bgPrev,0,0);
+  case TITLE:
+    background(noise(frameCount)*100, noise(frameCount*2)*100, noise(frameCount*3)*100);
+    textAlign(CENTER);
+    pushMatrix();
+    translate(HW, HH);
+    rotate(sin(frameCount*STEP*3)/2);
+    fill(0);
+    text("TITLE SCREEN", 5*sin(frameCount*STEP*3), 25);
+    fill(255);
+    text("TITLE SCREEN", 0, 20);
+    popMatrix();
+    break;
+
+  case GAME:
+    // Background, next level
+    image(bgNext, 0, 0);
+    // Faded current level
+    tfade = (3-inPlay.size())*(255/3);
+    fade += (tfade - fade) / fadeLength;
+    sfade -= sfade < 5 ? sfade : sfade/fadeLength;
+    //println(sfade);
+    pushMatrix();
+    tint(255, fade);
+    image(bgCurr, 0, 0);
+    if (sfade>0 && currentLevel.levelNum > 0)
+    {
+      tint(255, sfade);
+      image(bgPrev, 0, 0);
+    }
+    popMatrix();
+    // Draw layers
+    for (int i=0;i<shapes.size();i++)
+    {
+      if (shapes.size()-i > 10) continue;
+      //fill(0, 52);
+      //rect(0, 0, width, height);
+      ((Shape)shapes.get(i)).draw();
+    }
+    // Draw dots
+    for (int i=0;i<dots.size();i++)
+      ((ColorDot)dots.get(i)).draw();
+    pmousePressed = mousePressed;
+    currentLevel.levelText();
+    break;
+
+  case END:
+    
+    break;
   }
-  popMatrix();
-  // Draw layers
-  for (int i=0;i<shapes.size();i++)
-  {
-    if(shapes.size()-i > 10) continue;
-    //fill(0, 52);
-    //rect(0, 0, width, height);
-    ((Shape)shapes.get(i)).draw();
-  }
-  // Draw dots
-  for (int i=0;i<dots.size();i++)
-    ((ColorDot)dots.get(i)).draw();
-  pmousePressed = mousePressed;
-  currentLevel.levelText();
 }
 
 float oscillation(float osc_offset)
@@ -96,3 +123,8 @@ void pop()
   popMatrix();
 }
 
+void mouseClicked()
+{
+  if(mode > 0) return;
+  mode = 1;
+}
