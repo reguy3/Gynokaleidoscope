@@ -1,16 +1,10 @@
 100	You started as a spark, leaping between two sources--a completed circuit. Nothing more. The universe expanded from a single point, loaded with infinite possibilities, and is still expanding into eternity. You are the same. You are a single point of data. Expand.	00	00	00
-
-080	Three of the same color. *We've been trying. Maybe this time.* [That spark--you--it took. A one-in-a-million chance. A marvel of mathematics. But you didn't expect every one of those points to be the same, did you? The universe is a controlled chaos. Hydrogen molecules seek out others, build upon each other and create all this--water. What patterns do you see?]	00	00	01	01	01
-
-120	Did you hear that? The whole universe moves to that beat. You do too. *There are two lines!!* Keep moving.		00	00	01	01	01
-
-100	Or three different colors. [It isn't enough just to copy what's been here before. Make something that hasn't been seen yet. A new re-combination. You aren't a homogenous being--if you're going to be whole, you also have to figure out how to make your many different parts act together. Cells, ecosystems, galaxies, all of these things are the sum of many, acting together. Try it.]	00	01	02
-
-100	[Don't think that there's only one way to knit yourself together. Like begets like, but opposites attract. Complimentary and contradictory. Yin or Yang. Choose one, and keep building.] Choose same or different.	00	00	00	01	02
-
-100	Match 3 same shapes. [There are shapes in nature that are repeated over and over and over again. Heaven is in the math. The Fibonacci sequence. The Golden Ratio. Flowers unfurl, shells twist, and stars spin according to these few simple laws--shape. Geometry. Repeating pairs.]	01	01	11	11	11
-
-100	Different colors, same shape. [You'll find often that the patterns that you thought were familiar create unfamiliar iterations. Don't be confused. Keep growing. You have many, many more to discover.]	10	11	12	01	02
-100	3 different shapes [As you grow, you change. Nothing is still, here. You'll be something greater than the sum of your parts. Keep moving.]	02	12	22
-100	All blue spires or all blue shapes. [	22	22	22	12	02
+080	*We've been trying. Maybe this time.* That spark--you--it took. A one-in-a-million chance. A marvel of mathematics. But you didn't expect every one of those points to be the same, did you? The universe is a controlled chaos. Hydrogen molecules seek out others, build upon each other and create all this--water. What patterns do you see?	00	00	01	01	01
+120	*There are two lines!!* Do you hear that? The whole universe moves to that beat. You do too. Keep moving.	00	00	01	01	01
+100	It isn't enough just to copy what's been here before. Make something that hasn't been seen yet. A new re-combination. You aren't a homogenous being--if you're going to be whole, you also have to figure out how to make your many different parts act together. Cells, ecosystems, galaxies, all of these things are the sum of many, acting together. Try it.	00	01	02
+100	Don't think that there's only one way to knit yourself together. Like begets like, but opposites attract. Complimentary and contradictory. Yin or Yang. Choose one, and keep building.	00	00	00	01	02
+100	There are shapes in nature that are repeated over and over and over again. Heaven is in the math. The Fibonacci sequence. The Golden Ratio. Flowers unfurl, shells twist, and stars spin according to these few simple laws--shape. Geometry. Repeating pairs.	01	01	11	11	11
+100	You'll find often that the patterns that you thought were familiar create unfamiliar iterations. Don't be confused. Keep growing. You have many, many more to discover.	10	11	12	01	02
+100	As you grow, you change. Nothing is still, here. You'll be something greater than the sum of your parts. Keep moving.	02	12	22
+100	All blue spires or all blue shapes.	22	22	22	12	02
 100	Choose: all different or all spires.	22	11	00	22	20
