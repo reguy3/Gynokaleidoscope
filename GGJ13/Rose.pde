@@ -40,16 +40,23 @@ class Rose extends Shape
 
   void draw()
   {
+    alphaCalc();
     if(scale > 10) return;
     float currRadius = radius + oscillation(osc_offset)*10;
     push();
+    if(alpha==0) {
+//      System.out.println("Rose with alpha " + alpha + " is NOT being printed!!!!!!!!!!!!!!!!!!!!!!!!!");
+      pop();   
+      return;
+    }
+//    System.out.println("Rose with alpha " + alpha + " is being printed.");
     float t = 0;
     translate(HW, HH);
     rotate(rot);
     zoom();
-    alphaCalc();
     fill(c, alpha);
     stroke(c, alpha);
+    strokeWeight(0);
     beginShape();
     while (t <= loops)
     {

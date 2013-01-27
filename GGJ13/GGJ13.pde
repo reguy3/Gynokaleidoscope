@@ -6,6 +6,12 @@ static final int ROSE = 0;
 static final int HYPER = 1;
 static final int SPIRO = 2;
 
+int mode = 0;
+static final int TITLE = 0;
+static final int GAME = 1;
+static final int END = 2;
+static final int FADE= 3;
+
 float HW, HH;
 String levelFile = "levels.txt";
 boolean pmousePressed = false;
@@ -18,10 +24,11 @@ int tInit = 0;
 Level currentLevel;
 int backgrounds = 8; //number of images
 PImage[] bgArray;
+float superFade = 0;
 
 void setup() 
 {
-  size(1600, 1200);
+  size(800, 600);
   HW = width/2;
   HH = height/2;
   createLevels();
@@ -29,56 +36,131 @@ void setup()
   dots = currentLevel.set();
   shapes = new ArrayList(shapeLimit);
   unitTesting();
-  textFont(createFont("Arial", 72));
+  textFont(createFont("Arial", 48));
   bgArray = new PImage[backgrounds];
-  for(int i=0;i<backgrounds;i++)
+  for (int i=0;i<backgrounds;i++)
     bgArray[i] = loadImage(i+".jpg");
-  //setupSound();
-  //playMainTheme();
+  bgPrev = bgArray[0];
+  bgCurr = bgArray[0];
+  bgNext = bgArray[1];
+  setupSound();
+  playMainTheme();
+
+  ekg = new float[ceil(260/5)];
+  for (int i=0;i<ekg.length;i++)
+    ekg[i] = 0f;
+  ekg[2] = 20f;
+  ekg[3] = 100f;
+  ekg[4] = -20f;
+  ekg[8] = 5f;
 }
 
-float tfade = 255, fade = 255, sfade = 0;
+PImage bgPrev, bgCurr, bgNext;
+float tfade = 255, fade = 255, sfade = 0, fadeLength = 10;
+float[] ekg;
 void draw()
 {
-  // Background, next level
-  background(bgArray[currentLevel.levelNum+1]);
-  // Faded current level
-  tfade = (3-inPlay.size())*(255/3);
-  fade += (tfade - fade) / 10;
-  sfade = sfade < 5 ? 0 : sfade*.9;
-  println(sfade);
-  pushMatrix();
-  tint(255, fade);
-  image(bgArray[currentLevel.levelNum],0,0);
-  if(currentLevel.levelNum > 0)
+  soundLoop();
+  switch(mode)
   {
-    tint(255, sfade);
-    image(bgArray[currentLevel.levelNum-1],0,0);
+  case TITLE:
+    image(bgArray[0], 0, 0);
+    //filter(BLUR, 8);
+    textAlign(CENTER);
+    textSize(180);
+    for (int i=0;i<2;i++)
+    {
+      //filter(BLUR, 2);
+      fill(i*255);
+      stroke(i*255);
+      strokeWeight(12);
+      strokeCap(SQUARE);
+      text("scope", HW+100, HH-(i*5));
+      noFill();
+      beginShape();
+      for (int x=0;x<260;x+=10)
+      {
+        vertex(HW-410+x, HH-5-(i*5)-ekg[(frameCount+floor(x/10))%ekg.length]);
+      }
+      endShape();
+    }
+    break;
+
+  case GAME:
+  case FADE:
+    textSize(40);
+    // Background, next level
+    if (mode == GAME)
+    {
+      if (bgNext == null)
+        background(255);
+      else
+        image(bgNext, 0, 0);
+      // Faded current level
+      tfade = (3-inPlay.size())*(255/3);
+      fade += (tfade - fade) / fadeLength;
+      sfade -= sfade < 5 ? sfade : sfade/fadeLength;
+      //println(sfade);
+      pushMatrix();
+      tint(255, fade);
+      image(bgCurr, 0, 0);
+      if (sfade>0 && currentLevel.levelNum > 0)
+      {
+        tint(255, sfade);
+        image(bgPrev, 0, 0);
+      }
+      popMatrix();
+    }
+    else
+      background(255);
+    // Draw layers
+    for (int i=0;i<shapes.size();i++)
+    {
+      if (shapes.size()-i > 10) continue;
+      //fill(0, 52);
+      //rect(0, 0, width, height);
+      ((Shape)shapes.get(i)).draw();
+    }
+    // Draw dots
+    if (mode == GAME)
+      for (int i=0;i<dots.size();i++)
+        ((ColorDot)dots.get(i)).draw();
+    else
+    {
+      fill(255);
+      // TEXT?
+    }
+    if (mode == FADE)
+    {
+      superFade += 255/120;
+      fill(255, superFade);
+      stroke(255);
+      rect(0, 0, width, height);
+      fill(0, 255*sin((superFade/480)*TWO_PI));
+      text("Well done.", HW, height-50);
+      if (255-superFade < 10)
+      {
+        mode = END;
+      }
+    }
+    pmousePressed = mousePressed;
+    currentLevel.levelText();
+    break;
+  case END:
+    background(255, 255, 200);
+    fill(0);
+    text(":)", HW, HH);
+    break;
   }
-  popMatrix();
-  // Draw layers
-  for (int i=0;i<shapes.size();i++)
-  {
-    if(shapes.size()-i > 10) continue;
-    //fill(0, 52);
-    //rect(0, 0, width, height);
-    ((Shape)shapes.get(i)).draw();
-  }
-  // Draw dots
-  for (int i=0;i<dots.size();i++)
-    ((ColorDot)dots.get(i)).draw();
-  pmousePressed = mousePressed;
-  currentLevel.levelText();
 }
 
 float oscillation(float osc_offset)
 {
-  return sin(millis()/500f+osc_offset);
-}
-
-float oscillation()
-{
-  return sin(millis()/500f);
+  if (millis()%1000 == 0)
+  {
+    // BRYAN MAYER! HEARTBEAT HERE!
+  }
+  return sin((((millis()%1000)/1000f)*currentLevel.tempo+osc_offset)*TWO_PI);
 }
 
 void push()
@@ -92,3 +174,15 @@ void pop()
   popMatrix();
 }
 
+void mouseClicked()
+{
+  if (mode > 0) return;
+  mode = 1;
+}
+
+void exit()
+{
+  stopSound();
+  println("exiting");
+  super.exit();
+}

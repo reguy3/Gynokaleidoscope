@@ -16,6 +16,7 @@ color[] colors = {
 class ColorDot
 {
   color c;
+  int ts = 1;
   float s = 0f;
   int start, prevMillis, owidth;
   boolean selected = false;
@@ -56,7 +57,7 @@ class ColorDot
           inPlay.add(newShape);
           if (inPlay.size() == 3)
           {
-            if (isSet(((Shape) inPlay.get(0)), ((Shape) inPlay.get(1)), ((Shape) inPlay.get(2)), currentLevel.levelNum > 10))
+            if (isSet(((Shape) inPlay.get(0)), ((Shape) inPlay.get(1)), ((Shape) inPlay.get(2)), false))
             {
               int nextLevel = currentLevel.levelNum+1;
               sfade = fade;
@@ -64,15 +65,32 @@ class ColorDot
               if (nextLevel == levels.size())
               {
                 // YOU WIN!
+                int j = 0;
+                for (int i=shapes.size()-1;i>=0;i--)
+                {
+                  ((Shape) shapes.get(i)).tscale = (++j)*.1;
+                }
+                for (int i=0;i<dots.size();i++)
+                {
+                  ((ColorDot) dots.get(i)).ts = 0;
+                }
+                inPlay = new ArrayList();
+                mode = FADE;
+                return;
               }
               else 
               {
+                bgPrev = bgCurr;
+                bgCurr = bgNext;
+                bgNext = bgArray[nextLevel];
                 currentLevel = ((Level) levels.get(nextLevel));
                 shapeCount = currentLevel.dots.length;
               }
+              playWin();
             }
             else
             {
+              playFail();
               println("FAIL");
               currentLevel.displayedText = false;
             }
@@ -87,9 +105,9 @@ class ColorDot
             dots.remove(dots.indexOf(this));
             /*
             if (currentShape+dots.size() <= shapeLimit)
-            {
-              dots.add(createNewDot());
-            } */
+             {
+             dots.add(createNewDot());
+             } */
           }
         }
       }
@@ -100,7 +118,10 @@ class ColorDot
       push();
       translate(HW, HH);
       scale(s);
-      s = min(1, s+.1);
+      if (ts == 1)
+        s = min(1, s+.1);
+      else
+        s = max(0, s-.05);
       prevMillis = millis();
       float t = (prevMillis-start)/3000f;
       float x = owidth*cos(t)/s;
@@ -219,6 +240,7 @@ class RoseDot extends ColorDot
 
   Shape createNewShape()
   {
+    playGrow();
     return new Rose(this);
   }
 

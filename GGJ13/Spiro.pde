@@ -58,6 +58,7 @@ class Spiro extends Shape
 
   void draw()
   {
+    alphaCalc();
     float centX = HW;
     float centY = HH;
     //    for(int iter=0; iter<=3; iter++) { 
@@ -84,9 +85,14 @@ class Spiro extends Shape
     float t = 0;
 
     push();
+    if(alpha==0) {
+//      System.out.println("Spiro with alpha " + alpha + " is NOT being printed.");
+      pop();   
+      return;
+    }
+//    System.out.println("Spiro with alpha " + alpha + " is being printed.");
     translate(centX, centY);
     zoom();
-    alphaCalc();
     noFill();
     stroke(c, alpha);
     strokeWeight(3);

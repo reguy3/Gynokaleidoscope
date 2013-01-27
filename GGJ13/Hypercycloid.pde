@@ -23,28 +23,35 @@ class Hypercycloid extends Shape
 
   void draw()
   {
+    alphaCalc();
     float currRadius = radius/2 + oscillation(osc_offset)*10;
     push();
+    if(alpha==0) {
+//      System.out.println("Hypercycloid with alpha " + alpha + " is NOT being printed.");   
+      pop();
+      return;
+    }
+//    System.out.println("HypercySpirolpha " + alpha + " is being printed.");
     float t = 0;
     translate(HW, HH);
     rotate(rot);
     zoom();
-    alphaCalc();
     fill(c, alpha);
     stroke(c, alpha);
+    strokeWeight(0);
     beginShape();
     while (t <= TWO_PI)
     {
       float x = currRadius*petals*cos(t)+currRadius*cos(petals*t);
       float y = currRadius*petals*sin(t)-currRadius*sin(petals*t);
-      curveVertex(x, y);
+      vertex(x, y);
       t += STEP;
     }
     for (byte i=0;i<3;i++)
     {
       float x = currRadius*petals*cos(t)+currRadius*cos(petals*t);
       float y = currRadius*petals*sin(t)-currRadius*sin(petals*t);
-      curveVertex(x, y);
+      vertex(x, y);
       t += STEP;
     }
     endShape(CLOSE);
