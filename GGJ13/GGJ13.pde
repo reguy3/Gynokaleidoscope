@@ -23,8 +23,8 @@ void setup()
   HW = width/2;
   HH = height/2;
   createLevels();
-  currentLevel = (Level)(levels.get(0));
-  dots = currentLevel.set;
+  currentLevel = (Level)(levels.get(1));
+  dots = currentLevel.set();
   shapes = new ArrayList(shapeLimit);
   unitTesting();
   textFont(createFont("Arial", 48));
