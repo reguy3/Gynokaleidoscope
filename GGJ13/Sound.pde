@@ -142,16 +142,16 @@ void playBabby(int level)
 {
   switch(level)
   {
-  case 3:
+  case 1:
     seBabby3.gain(30);
     seBabby3.play();
     println("babby formed");
     break;
-  case 4:
+  case 2:
     seBabby4.gain(30);
     seBabby4.play();
     break;
-  case 5:
+  case 3:
     seBabby5.gain(30);
     seBabby5.play();
     break;
