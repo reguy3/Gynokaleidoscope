@@ -25,8 +25,8 @@ void setup()
   shapes = new ArrayList(shapeLimit);
   unitTesting();
   
-  setupSound();
-  playMainTheme();
+  //setupSound();
+  //playMainTheme();
 }
 
 void draw()

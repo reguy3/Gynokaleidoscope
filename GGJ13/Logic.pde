@@ -28,71 +28,71 @@ boolean colorMatch(color op1, color op2)
 void unitTesting()
 {  
   // UNIT TESTING
-  //*
+  /*
   println(isSet(
     new Hypercycloid(0,0,0,colors[0]),
     new Rose(0,0,0,colors[0]),
     new Hypercycloid(0,0,0,colors[0]),
     false
   ));
-  //* true */
-  
+  // true */
+  /*
   println(isSet(
     new Hypercycloid(0,0,0,colors[0]),
     new Rose(0,0,0,colors[0]),
     new Hypercycloid(0,0,0,colors[1]),
     false
   ));
-  //* false */
- 
+  // false */
+  /*
   println(isSet(
     new Hypercycloid(0,0,0,colors[0]),
     new Rose(0,0,0,colors[1]),
     new Hypercycloid(0,0,0,colors[2]),
     false
   ));
-  //* true */
- 
+  // true */
+  /*
   println(isSet(
     new Rose(0,0,0,colors[0]),
     new Rose(0,0,0,colors[1]),
     new Rose(0,0,0,colors[2]),
     false
   ));
-  //* true */
- 
+  // true */
+  /*
   println(isSet(
     new Rose(0,0,0,colors[0]),
     new Rose(0,0,0,colors[1]),
     new Rose(0,0,0,colors[1]),
     false
   ));
-  //* false */
- 
+  // false */
+  /*
   println(isSet(
     new Rose(3,0,0,colors[0]),
     new Rose(4,0,0,colors[1]),
     new Rose(5,0,0,colors[2]),
     true
   ));
-  //* true */
- 
+  // true */
+  /*
   println(isSet(
     new Rose(3,0,0,colors[0]),
     new Hypercycloid(5,0,0,colors[1]),
     new Rose(4,0,0,colors[2]),
     false
   ));
-  //* false */
- 
+  // false */
+  /*
   println(isSet(
     new Rose(3,0,0,colors[0]),
     new Rose(3,0,0,colors[1]),
     new Rose(3,0,0,colors[2]),
     true
   ));
-  //* true */
- 
+  // true */
+  /*
   println(isSet(
     new Rose(3,0,0,colors[0]),
     new Rose(4,0,0,colors[1]),

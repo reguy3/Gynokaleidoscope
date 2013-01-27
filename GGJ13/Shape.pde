@@ -1,9 +1,9 @@
 class Shape
 {
-  int TYPE, petals;
+  byte TYPE;
   color c;
   int alpha;
-  float tscale=1,scale=1;
+  float tscale=1, scale=1, petals;
   float scaleStep = 1.6; //amount to increase tscale by each zoom level
   
   Shape()

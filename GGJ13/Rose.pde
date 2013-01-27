@@ -8,19 +8,36 @@ class Rose extends Shape
 {
   float rot, radius;
   float osc_offset = (float)Math.random()*2*PI;
+  float loops = TWO_PI;
   Rose(int k, int r, float g, color ci)
   {
     TYPE = 0;
-    
+
     petals = k%2==0 ? k/2 : k;
     radius = r;
     rot = g;
     c = ci;
   }
-  Rose(ColorDot src)
+  Rose(RoseDot src)
   {
-    petals = ceil(((RoseDot) src).frame/((RoseDot) src).peelRate);
-    petals = petals%2 == 0 ? petals/2 : petals;
+    petals = ceil(src.frame/src.peelRate);
+    println(petals);
+    switch((int)petals)
+    {
+    case 4:
+    case 8:
+      petals /= 2;
+      break;
+    case 6:
+      petals = 6/4f;
+      loops *= 2;
+      break;
+    case 10:
+      petals = 5/2f;
+      loops *= 4;
+      break;
+    }
+    println(petals);
     radius = floor(dist(mouseX, mouseY, HW, HH));
     rot = atan2(mouseY-src.prev.y, mouseX-src.prev.x) - HALF_PI;
     c = src.c;
@@ -38,7 +55,7 @@ class Rose extends Shape
     rotate(rot);
     zoom();
     beginShape();
-    while (t <= TWO_PI)
+    while (t <= loops)
     {
       float x = currRadius*(cos(petals*t)*sin(t));
       float y = currRadius*(cos(petals*t)*cos(t));
