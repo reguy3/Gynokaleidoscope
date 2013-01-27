@@ -8,6 +8,8 @@ class Spiro extends Shape
   float br, lr, p;
   Spiro(float b, float l, float a, color ci)
   {
+    TYPE = 2;
+    
     br = b;
     lr = l;
     p = a;
@@ -53,7 +55,7 @@ class Spiro extends Shape
       vertex(x, y);
       t += STEP;
     }
-    endShape();
+    endShape(CLOSE);
     pop();
   }
   

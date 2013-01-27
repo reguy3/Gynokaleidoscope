@@ -1,5 +1,6 @@
 class Shape
 {
+  int TYPE, petals;
   color c;
   float tscale=1,scale=1;
   float scaleStep = 1.6; //amount to increase tscale by each zoom level

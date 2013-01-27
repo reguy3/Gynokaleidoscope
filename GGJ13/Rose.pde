@@ -6,11 +6,12 @@
 //ArrayList roses = new ArrayList();
 class Rose extends Shape
 {
-  int petals;
   float rot, radius;
   float osc_offset = (float)Math.random()*2*PI;
   Rose(int k, int r, float g, color ci)
   {
+    TYPE = 0;
+    
     petals = k%2==0 ? k/2 : k;
     radius = r;
     rot = g;

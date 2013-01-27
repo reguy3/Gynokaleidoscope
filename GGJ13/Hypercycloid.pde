@@ -6,11 +6,12 @@
 //ArrayList roses = new ArrayList();
 class Hypercycloid extends Shape
 {
-  int petals;
   float rot, radius;
   float osc_offset = (float)Math.random()*2*PI;
   Hypercycloid(int k, int r, float g, color ci)
   {
+    TYPE = 1;
+    
     petals = k%2==0 ? k/2 : k;
     radius = r;
     rot = g;
