@@ -6,6 +6,7 @@
 class Spiro extends Shape
 {
   float br, lr, p;
+  float osc_offset = (float)Math.random()*2*PI;
   float[] ratios = {
     1.125, // 31
     2.2,
@@ -61,26 +62,27 @@ class Spiro extends Shape
 
   void draw()
   {
-    for(int iter=0; iter<=3; iter++) {
-      float centX, centY;
-      switch (iter) {
-            case 0:  centX = HW/2;
-                     centY = HH/2;
-                     break;
-            case 1:  centX = 3*HW/2;
-                     centY = HH/2;
-                     break;
-            case 2:  centX = HW/2;
-                     centY = 3*HH/2;
-                     break;
-            case 3:  centX = 3*HW/2;
-                     centY = 3*HH/2;
-                     break;
-            default: centX = HW;
-                     centY = HH;
-                     break;
-      }
-      p += oscillation();    
+    float centX = HW;
+    float centY = HH;
+//    for(int iter=0; iter<=3; iter++) { 
+//      switch (iter) {
+//            case 0:  centX = HW/2;
+//                     centY = HH/2;
+//                     break;
+//            case 1:  centX = 3*HW/2;
+//                     centY = HH/2;
+//                     break;
+//            case 2:  centX = HW/2;
+//                     centY = 3*HH/2;
+//                     break;
+//            case 3:  centX = 3*HW/2;
+//                     centY = 3*HH/2;
+//                     break;
+//            default: centX = HW;
+//                     centY = HH;
+//                     break;
+//      }
+      p += oscillation(osc_offset);    
       float k = lr/br;
       float a = p/lr;
       float t = 0;
@@ -109,7 +111,7 @@ class Spiro extends Shape
       }
       endShape(CLOSE);
       pop();
-    }
+//    }
   }
   
   void pleaseDraw(float cx, float cy, float rot, float br, float lr, float p, color c, int w)
