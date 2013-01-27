@@ -36,8 +36,8 @@ void setup()
   bgPrev = bgArray[0];
   bgCurr = bgArray[0];
   bgNext = bgArray[1];
-  //setupSound();
-  //playMainTheme();
+  setupSound();
+  playMainTheme();
 }
 
 PImage bgPrev, bgCurr, bgNext;
