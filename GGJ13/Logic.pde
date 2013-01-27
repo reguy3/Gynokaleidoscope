@@ -27,6 +27,15 @@ boolean colorMatch(color op1, color op2)
   && (op1&255) == (op2&255);
 }
 
+color darken(color c, float s)
+{
+  println("D: "+s);
+  float r = c >> 16&255;
+  float g = c >> 8 &255;
+  float b = c &255;
+  return color(r/s, g/s, b/s);
+}
+
 void unitTesting()
 {  
   // UNIT TESTING

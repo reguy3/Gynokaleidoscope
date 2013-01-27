@@ -17,7 +17,7 @@ class ColorDot
 {
   color c;
   float s = 0f;
-  int start, prevMillis;
+  int start, prevMillis, owidth;
   boolean selected = false;
   Point prev;
   int TYPE;
@@ -30,7 +30,8 @@ class ColorDot
     }
     else
       c = colors[floor(random(colors.length))];
-    start = floor(random(sq(millis())));
+    start = floor(random(MAX_INT));
+    owidth = floor(random(50))+10;
   }
 
   void draw()
@@ -98,7 +99,7 @@ class ColorDot
       s = min(1, s+.1);
       prevMillis = millis();
       float t = (prevMillis-start)/3000f;
-      float x = 10*cos(t)/s;
+      float x = owidth*cos(t)/s;
       float y = 60*sin(t)/s;
       float d = dist(0, 0, x, y);
       float a = atan2(y, x)-(t/9);
@@ -131,7 +132,7 @@ class ColorDot
 
   Shape createNewShape()
   {
-    return new Rose(ceil(random(7))+3, 200, 0, colors[floor(random(3))]);
+    return new Shape(color(255), -1);
   }
 
   void shape(float x, float y, boolean hover)
@@ -203,11 +204,12 @@ class RoseDot extends ColorDot
 {
   float peelRate = 60;
   float frame = peelRate * 2;
-  Rose rose = new Rose(0, 0, 0, 0);
+  Rose rose;
 
   RoseDot(color[] ci)
   {
     super(ci);
+    rose = new Rose(ci[0]);
     TYPE = ROSE;
   }
 
@@ -242,12 +244,13 @@ class RoseDot extends ColorDot
 class SpiroDot extends ColorDot
 {
   int frame = 0;
-  Spiro spiro = new Spiro(10, 20, 5, c);
+  Spiro spiro;
 
   SpiroDot(color[] ci)
   {
     super(ci);
     TYPE = SPIRO;
+    spiro = new Spiro(ci[0]);
   }
 
   Shape createNewShape()
@@ -281,7 +284,7 @@ class SpiroDot extends ColorDot
 
 class HyperDot extends ColorDot
 {
-  Hypercycloid cycloid = new Hypercycloid(color(0));
+  Hypercycloid cycloid;
   float peelRate = 60;
   float frame = peelRate*2;
 
@@ -289,6 +292,7 @@ class HyperDot extends ColorDot
   {
     super(ci);
     TYPE = HYPER;
+    cycloid = new Hypercycloid(ci[0]);
   }
 
   Shape createNewShape()
