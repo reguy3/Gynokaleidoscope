@@ -41,8 +41,8 @@ void setup()
   bgPrev = bgArray[0];
   bgCurr = bgArray[0];
   bgNext = bgArray[1];
-  //setupSound();
-  //playMainTheme();
+  setupSound();
+  playMainTheme();
 }
 
 PImage bgPrev, bgCurr, bgNext;
@@ -123,8 +123,18 @@ void pop()
   popMatrix();
 }
 
+<<<<<<< HEAD
 void mouseClicked()
 {
   if(mode > 0) return;
   mode = 1;
 }
+=======
+void exit()
+{
+  stopSound();
+  println("stop");
+  super.exit();
+}
+
+>>>>>>> 5bb277db300677948a01fcaeee713d34e510998c

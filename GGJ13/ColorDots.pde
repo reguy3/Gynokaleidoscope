@@ -50,6 +50,7 @@ class ColorDot
         {
           for (int i=0; i<currentShape; i++)
             ((Shape)shapes.get(i)).scaleUp();
+          playGrow();
           Shape newShape = createNewShape();
           shapes.add(newShape);  
           currentShape++;
@@ -81,10 +82,12 @@ class ColorDot
                 currentLevel = ((Level) levels.get(nextLevel));
                 shapeCount = currentLevel.dots.length;
               }
+              playWin();
             }
             else
             {
               println("FAIL");
+              playFail();
               currentLevel.displayedText = false;
             }
             dots = currentLevel.set();
