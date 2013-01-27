@@ -1,13 +1,16 @@
 ArrayList dots = new ArrayList();
 boolean dotSelected = false;
 color[] colors = {
-  //color(100), 
-  //color(225, 50, 50), 
-  //color(50, 225, 50), 
-  //color(50, 50, 225), 
-  color(225, 225, 50), 
-  color(225, 50, 225), 
-  color(50, 225, 225), 
+  //color(100),
+  //**/ 
+  color(225, 60, 60), 
+  color(0, 225, 0), 
+  //color(70, 70, 225),
+  //*/ 
+  //color(225, 225, 50), 
+  //color(225, 50, 225), 
+  color(50, 225, 225),
+  //*/ 
   //color(225)
 };
 class ColorDot
@@ -82,7 +85,7 @@ class ColorDot
 
   Shape createNewShape()
   {
-    return new Rose(this);
+    return new Rose(ceil(random(9))+1, 200, 0, colors[floor(random(3))]);
   }
 
   void shape(float x, float y, boolean hover)
@@ -127,8 +130,8 @@ class RoseDot extends ColorDot
   void shape(float x, float y, boolean hover)
   {
     int r = hover ? 20 : 16;
-    rose.pleaseDraw(4, r, millis()/600f, x, y, 0, hover ? 7 : 5);
-    rose.pleaseDraw(4, r, millis()/600f, x, y, c, 3);
+    rose.pleaseDraw(4, r+2, millis()/600f, x, y, 0, 0);
+    rose.pleaseDraw(4, r, millis()/600f, x, y, c, 0);
   }
 
   void dragShape(float x, float y)
@@ -177,7 +180,7 @@ class SpiroDot extends ColorDot
     line(x, y, mouseX, mouseY);
     strokeWeight(1);
     fill(c);
-    float osc = sin(STEP*frame)/3+.5;
+    float osc = sin(STEP*frame/3)/3+.5;
     ellipse(x+(osc*(mouseX-x)), y+(osc*(mouseY-y)), 20, 20);
     spiro.pleaseDraw(x, y, millis()/600f, 10, 20, 5, c, 5);
     stroke(c);
