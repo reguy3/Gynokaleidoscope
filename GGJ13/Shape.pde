@@ -34,6 +34,6 @@ class Shape
       alpha = 255-25*(int)scale;
     else
       alpha=0;
-    System.out.println("Scale: " + scale + " 25Scale: " + scale*25 + " Alpha = " + alpha);
+    //System.out.println("Scale: " + scale + " 25Scale: " + scale*25 + " Alpha = " + alpha);
   }
 }

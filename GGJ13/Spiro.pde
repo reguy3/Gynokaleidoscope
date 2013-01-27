@@ -6,6 +6,26 @@
 class Spiro extends Shape
 {
   float br, lr, p;
+  float[] ratios = {
+    1.125, // 31
+    2.2,
+    2.25,
+    4,     // 3
+    1.5,   // 4
+    3,     // 5
+    1.25,  // 6
+    8,     // 7
+    2.5,   // 8
+    1.4,   // 9
+    1.75,  // 10
+    1.6,   // 11
+    1.1,   // 12
+    1.8,   // 13
+    2.75,
+    3.5,
+    4.5,
+    6
+  };
   Spiro(float b, float l, float a, color ci)
   {
     TYPE = 2;
@@ -16,13 +36,25 @@ class Spiro extends Shape
     c = ci;
   }
   
-  Spiro(ColorDot src)
+  Spiro(SpiroDot src)
   {
+    float aratio = pow(sin(STEP*src.frame)+1, 4)/2;
+    //println(aratio);
+    float fratio = aratio;
+    float d = 10;
+    for(int i=0;i<ratios.length;i++)
+    {
+      float id = abs(ratios[i]-aratio);
+      if(id < d) {
+        d = id;
+        fratio = ratios[i];
+      } 
+    }
+    //println(fratio);
     lr = ceil(dist(src.prev.x,src.prev.y,mouseX,mouseY));
     lr -= lr % 5;
-    br = max(lr/5, floor(((sin(STEP*((SpiroDot)src).frame)/3)+.3)*lr));
-    br -= br % 5;
-    p = 60;//lr - br;
+    br = lr / fratio;
+    p = 60;
     println(br+","+lr+","+p);
     c = src.c;
   }

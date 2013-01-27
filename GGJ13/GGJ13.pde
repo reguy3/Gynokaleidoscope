@@ -22,82 +22,9 @@ void setup()
   HH = height/2;
   dots = new ArrayList();
   for (byte i=0;i<shapeCount;i++)
-    dots.add(new HyperDot(floor(random(1000000000))));
+    dots.add(new SpiroDot(floor(random(1000000000))));
   shapes = new ArrayList(shapeLimit);
-  
-  // UNIT TESTING
-  /*
-  println(isSet(
-    new Hypercycloid(0,0,0,colors[0]),
-    new Rose(0,0,0,colors[0]),
-    new Hypercycloid(0,0,0,colors[0]),
-    false
-  ));
-  // true */
-  /* 
-  println(isSet(
-    new Hypercycloid(0,0,0,colors[0]),
-    new Rose(0,0,0,colors[0]),
-    new Hypercycloid(0,0,0,colors[1]),
-    false
-  ));
-  // false */
-  /*
-  println(isSet(
-    new Hypercycloid(0,0,0,colors[0]),
-    new Rose(0,0,0,colors[1]),
-    new Hypercycloid(0,0,0,colors[2]),
-    false
-  ));
-  // true */
-  /*
-  println(isSet(
-    new Rose(0,0,0,colors[0]),
-    new Rose(0,0,0,colors[1]),
-    new Rose(0,0,0,colors[2]),
-    false
-  ));
-  // true */
-  /*
-  println(isSet(
-    new Rose(0,0,0,colors[0]),
-    new Rose(0,0,0,colors[1]),
-    new Rose(0,0,0,colors[1]),
-    false
-  ));
-  // false */
-  /*
-  println(isSet(
-    new Rose(3,0,0,colors[0]),
-    new Rose(4,0,0,colors[1]),
-    new Rose(5,0,0,colors[2]),
-    true
-  ));
-  // true */
-  /*
-  println(isSet(
-    new Rose(3,0,0,colors[0]),
-    new Hypercycloid(5,0,0,colors[1]),
-    new Rose(4,0,0,colors[2]),
-    false
-  ));
-  // false */
-  /*
-  println(isSet(
-    new Rose(3,0,0,colors[0]),
-    new Rose(3,0,0,colors[1]),
-    new Rose(3,0,0,colors[2]),
-    true
-  ));
-  // true */
-  /*
-  println(isSet(
-    new Rose(3,0,0,colors[0]),
-    new Rose(4,0,0,colors[1]),
-    new Rose(4,0,0,colors[2]),
-    true
-  ));
-  // false */
+  unitTesting();
 }
 
 void draw()
