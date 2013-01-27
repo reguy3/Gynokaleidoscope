@@ -16,6 +16,7 @@ color[] colors = {
 class ColorDot
 {
   color c;
+  float s = 0f;
   int start, prevMillis;
   boolean selected = false;
   Point prev;
@@ -58,16 +59,20 @@ class ColorDot
     // ORBIT BEHAVIOR
     else
     {
+      push();
+      translate(HW, HH);
+      scale(s);
+      s = min(1, s+.02);
       prevMillis = millis();
       float t = (prevMillis-start)/3000f;
-      float x = 10*cos(t);
-      float y = 60*sin(t);
+      float x = 10*cos(t)/s;
+      float y = 60*sin(t)/s;
       float d = dist(0, 0, x, y);
       float a = atan2(y, x)-(t/9);
-      x = d*cos(a)+HW;
-      y = d*sin(a)+HH;
+      x = d*cos(a);
+      y = d*sin(a);
 
-      if (dist(x, y, mouseX, mouseY) < 16)
+      if (s == 1 && dist(x, y, mouseX-HW, mouseY-HH) < 16)
       {
         shape(x, y, true);
         if (!dotSelected && !pmousePressed && mousePressed)
@@ -78,7 +83,8 @@ class ColorDot
       }
       else
         shape(x, y, false);
-      prev = new Point(round(x), round(y));
+      pop();
+      prev = new Point(round(x+HW), round(y+HH));
     }
     pop();
   }
