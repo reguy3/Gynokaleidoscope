@@ -37,10 +37,25 @@ void setup()
   //playMainTheme();
 }
 
+float tfade = 255, fade = 255, sfade = 0;
 void draw()
 {
-  background(bgArray[currentLevel.levelNum]);
-  // Vignette
+  // Background, next level
+  background(bgArray[currentLevel.levelNum+1]);
+  // Faded current level
+  tfade = (3-inPlay.size())*(255/3);
+  fade += (tfade - fade) / 10;
+  sfade = sfade < 5 ? 0 : sfade*.9;
+  println(sfade);
+  pushMatrix();
+  tint(255, fade);
+  image(bgArray[currentLevel.levelNum],0,0);
+  if(currentLevel.levelNum > 0)
+  {
+    tint(255, sfade);
+    image(bgArray[currentLevel.levelNum-1],0,0);
+  }
+  popMatrix();
   // Draw layers
   for (int i=0;i<shapes.size();i++)
   {
