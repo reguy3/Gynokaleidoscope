@@ -27,6 +27,9 @@ void setup()
     dots.add(new SpiroDot(floor(random(1000000000))));
   shapes = new ArrayList(shapeLimit);
   unitTesting();
+  
+  setupSound();
+  playMainTheme();
 }
 
 void draw()
