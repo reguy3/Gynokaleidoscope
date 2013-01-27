@@ -43,7 +43,7 @@ class Level
 
   float textFade = 0;
   void levelText() {
-    int duration = 3000;
+    int duration = 5000;
     if (!displayedText)
     {
       tInit = millis();
@@ -57,11 +57,11 @@ class Level
       : textFade+(target-textFade)/15;
     if(textFade == 0) return;
     textAlign(CENTER);
-    int shift = 75;
+    int shift = 200;
     if (keyPressed) tInit += 3*(millis()-tInit)/4;
-    fill(255, textFade);
-    text("Week " + (levelNum+1), width/2, shift);
-    text(storyText, width/2, height-shift);
+    fill(0, textFade);
+    text("Week " + (levelNum+1), HW, 75);
+    text(storyText, 0, height-shift, width, shift);
   }
 }
 

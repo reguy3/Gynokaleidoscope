@@ -131,11 +131,12 @@ void draw()
     }
     if (mode == FADE)
     {
-      superFade += (255-superFade)/60;
+      superFade += 255/120;
       fill(255, superFade);
       stroke(255);
       rect(0, 0, width, height);
-      println(superFade);
+      fill(0, 255*sin((superFade/480)*TWO_PI));
+      text("Well done.", HW, height-50);
       if (255-superFade < 10)
       {
         mode = END;
