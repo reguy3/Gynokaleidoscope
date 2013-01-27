@@ -61,35 +61,55 @@ class Spiro extends Shape
 
   void draw()
   {
-    p += oscillation();    
-    float k = lr/br;
-    float a = p/lr;
-    float t = 0;
-    
-    push();
-    translate(HW, HH);
-    zoom();
-    noFill();
-    alphaCalc();
-    stroke(c, alpha);
-    strokeWeight(3);
-    beginShape();
-    float b2, b1 = 1/(1-(br/lr));
-    int i;
-    for (i=1;i<30;i++)
-      if ((i*b1)%1 < .001)
-        break;
-    b1 *= i;
-
-    while (t <= TWO_PI*b1)
-    {
-      float x = br*((1-k)*cos(t)+a*k*cos(((1-k)/k)*t));//r*(cos(k*t)*sin(t));
-      float y = br*((1-k)*sin(t)+a*k*sin(((1-k)/k)*t));//r*(-cos(k*t)*cos(t));
-      vertex(x, y);
-      t += STEP;
+    for(int iter=0; iter<=3; iter++) {
+      float centX, centY;
+      switch (iter) {
+            case 0:  centX = HW/2;
+                     centY = HH/2;
+                     break;
+            case 1:  centX = 3*HW/2;
+                     centY = HH/2;
+                     break;
+            case 2:  centX = HW/2;
+                     centY = 3*HH/2;
+                     break;
+            case 3:  centX = 3*HW/2;
+                     centY = 3*HH/2;
+                     break;
+            default: centX = HW;
+                     centY = HH;
+                     break;
+      }
+      p += oscillation();    
+      float k = lr/br;
+      float a = p/lr;
+      float t = 0;
+      
+      push();
+      translate(centX, centY);
+      zoom();
+      noFill();
+      alphaCalc();
+      stroke(c, alpha);
+      strokeWeight(3);
+      beginShape();
+      float b2, b1 = 1/(1-(br/lr));
+      int i;
+      for (i=1;i<30;i++)
+        if ((i*b1)%1 < .001)
+          break;
+      b1 *= i;
+  
+      while (t <= TWO_PI*b1)
+      {
+        float x = br*((1-k)*cos(t)+a*k*cos(((1-k)/k)*t));//r*(cos(k*t)*sin(t));
+        float y = br*((1-k)*sin(t)+a*k*sin(((1-k)/k)*t));//r*(-cos(k*t)*cos(t));
+        vertex(x, y);
+        t += STEP;
+      }
+      endShape(CLOSE);
+      pop();
     }
-    endShape(CLOSE);
-    pop();
   }
   
   void pleaseDraw(float cx, float cy, float rot, float br, float lr, float p, color c, int w)
