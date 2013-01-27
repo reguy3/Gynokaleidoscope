@@ -65,7 +65,7 @@ class ColorDot
               bgPrev = bgCurr;
               bgCurr = bgNext;
               bgNext = bgArray[nextLevel];
-              if (nextLevel == levels.size())
+              if (nextLevel == 1)//levels.size())
               {
                 // YOU WIN!
                 for (int i=0;i<shapes.size();i++)
@@ -119,7 +119,7 @@ class ColorDot
       if (ts == 1)
         s = min(1, s+.1);
       else
-        s = max(0, s-.1);
+        s = max(0, s-.05);
       prevMillis = millis();
       float t = (prevMillis-start)/3000f;
       float x = owidth*cos(t)/s;

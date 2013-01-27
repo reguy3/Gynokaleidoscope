@@ -157,11 +157,6 @@ float oscillation(float osc_offset)
   return sin((((millis()%1000)/1000f)*currentLevel.tempo)*TWO_PI);
 }
 
-float oscillation()
-{
-  return sin(millis()/500f);
-}
-
 void push()
 {
   pushMatrix();
