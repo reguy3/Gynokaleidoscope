@@ -64,6 +64,7 @@ class ColorDot
             if (isSet(((Shape) inPlay.get(0)), ((Shape) inPlay.get(1)), ((Shape) inPlay.get(2)), false))
             {
               int nextLevel = currentLevel.levelNum+1;
+              playBabby(nextLevel-1);
               sfade = fade;
               fade = 255;
               if (nextLevel == levels.size())
@@ -285,6 +286,7 @@ class SpiroDot extends ColorDot
 
   Shape createNewShape()
   {
+    playGrow();
     return new Spiro(this);
   }
 
@@ -326,6 +328,7 @@ class HyperDot extends ColorDot
 
   Shape createNewShape()
   {
+    playGrow();
     return new Hypercycloid(this);
   }
 

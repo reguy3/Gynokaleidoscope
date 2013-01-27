@@ -2,6 +2,7 @@ AudioChannel mainTheme;
 AudioChannel seLevWin, seLevFail;
 AudioChannel seGrow1, seGrow2, seGrow3, seGrow4;
 AudioChannel seHalfHeart1, seHalfHeart2, seFullHeart;
+AudioChannel seBabby3, seBabby4, seBabby5;
 
 
 int growCount = 0;
@@ -31,6 +32,10 @@ void setupSound()
   seHalfHeart2 = new AudioChannel("HalfHeart2.mp3");
   seFullHeart = new AudioChannel("WholeHeart.mp3");
   seFullHeart.gain(5);
+  
+  seBabby3 = new AudioChannel("Babby3.mp3");
+  seBabby4 = new AudioChannel("Babby4.mp3");
+  seBabby5 = new AudioChannel("Babby5.mp3");
 
 }
 
@@ -130,6 +135,79 @@ void soundLoop()
   else
     beatCheck = true;
 }
+
+
+
+void playBabby(int level)
+{
+  switch(level)
+  {
+  case 3:
+    seBabby3.gain(30);
+    seBabby3.play();
+    println("babby formed");
+    break;
+  case 4:
+    seBabby4.gain(30);
+    seBabby4.play();
+    break;
+  case 5:
+    seBabby5.gain(30);
+    seBabby5.play();
+    break;
+  }
+//  case 800:
+//    seBlock4.gain(6);
+//    seBlock4.play();
+//    break;
+//  case 900:
+//    seBlock5.gain(4);
+//    seBlock5.play();
+//    break;
+//  case 5:
+//    seBlock6.gain(2);
+//    seBlock6.play();
+//    break;
+//  case 6:
+//    //seBlock8.gain(10);
+//    seBlock8.play();
+//    break;
+//  case 7:
+//    //seBlock8.gain(10);
+//    seBlock8.play();
+//    break;
+//  case 8:
+//    //seBlock9.gain(10);
+//    seBlock9.play();
+//    break;
+//  case 9:
+//    //seBlock10.gain(10);
+//    seBlock10.play();
+//    break;
+//  case 10:
+//    //seBlock11.gain(10);
+//    seBlock11.play();
+//    break;
+//  case 11:
+//    //seBlock12.gain(10);
+//    seBlock12.play();
+//    break;
+//  case 12:
+//    //seBlock13.gain(10);
+//    seBlock13.play();
+//    break;
+//  case 13:
+//    //seBlock15.gain(10);
+//    seBlock15.play();
+//    break;
+//  default:
+//    //seBlock15.gain();
+//    seBlock15.play();
+//    break;
+//  }
+//  println(rand);
+}
+
 
 void stopAllSE()
 {
