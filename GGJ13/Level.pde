@@ -57,8 +57,11 @@ class Level
       : textFade+(target-textFade)/15;
     if(textFade == 0) return;
     textAlign(CENTER);
-    int shift = 200;
+    int shift = 250;
     if (keyPressed) tInit += 3*(millis()-tInit)/4;
+    fill(255, 100);
+    noStroke();
+    rect(0, height-shift-10, width, shift+10);
     fill(0, textFade);
     text("Week " + (levelNum+1), HW, 75);
     text(storyText, 0, height-shift, width, shift);

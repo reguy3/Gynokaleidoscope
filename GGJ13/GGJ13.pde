@@ -13,7 +13,7 @@ static final int END = 2;
 static final int FADE= 3;
 
 float HW, HH;
-String levelFile = "levels.txt";
+String levelFile = "levels2.txt";
 boolean pmousePressed = false;
 int shapeCount = 5;
 int shapeLimit = 100;
