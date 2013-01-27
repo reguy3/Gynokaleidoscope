@@ -88,6 +88,7 @@ void draw()
 
   case GAME:
   case FADE:
+    background(0);
     textSize(40);
     // Background, next level
     if (mode == GAME)
@@ -101,7 +102,7 @@ void draw()
       fade += (tfade - fade) / fadeLength;
       sfade -= sfade < 5 ? sfade : sfade/fadeLength;
       //println(sfade);
-      pushMatrix();
+      pushStyle();
       tint(255, fade);
       image(bgCurr, 0, 0, width, height);
       if (sfade>0 && currentLevel.levelNum > 0)
@@ -109,7 +110,7 @@ void draw()
         tint(255, sfade);
         image(bgPrev, 0, 0, width, height);
       }
-      popMatrix();
+      popStyle();
     }
     else
       background(255);
