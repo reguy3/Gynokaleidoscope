@@ -43,8 +43,8 @@ void setup()
   bgPrev = bgArray[0];
   bgCurr = bgArray[0];
   bgNext = bgArray[1];
-  //setupSound();
-  //playMainTheme();
+  setupSound();
+  playMainTheme();
 
   ekg = new float[ceil(260/5)];
   for (int i=0;i<ekg.length;i++)
@@ -60,6 +60,7 @@ float tfade = 255, fade = 255, sfade = 0, fadeLength = 10;
 float[] ekg;
 void draw()
 {
+  soundLoop();
   switch(mode)
   {
   case TITLE:
@@ -179,3 +180,9 @@ void mouseClicked()
   mode = 1;
 }
 
+void exit()
+{
+  stopSound();
+  println("exiting");
+  super.exit();
+}

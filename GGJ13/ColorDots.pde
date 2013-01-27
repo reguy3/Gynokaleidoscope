@@ -86,9 +86,11 @@ class ColorDot
                 currentLevel = ((Level) levels.get(nextLevel));
                 shapeCount = currentLevel.dots.length;
               }
+              playWin();
             }
             else
             {
+              playFail();
               println("FAIL");
               currentLevel.displayedText = false;
             }
@@ -238,6 +240,7 @@ class RoseDot extends ColorDot
 
   Shape createNewShape()
   {
+    playGrow();
     return new Rose(this);
   }
 
