@@ -65,7 +65,7 @@ class ColorDot
               bgPrev = bgCurr;
               bgCurr = bgNext;
               bgNext = bgArray[nextLevel];
-              if (nextLevel == 1)//levels.size())
+              if (nextLevel == levels.size())
               {
                 // YOU WIN!
                 for (int i=0;i<shapes.size();i++)

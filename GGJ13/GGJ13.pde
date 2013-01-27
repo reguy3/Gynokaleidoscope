@@ -134,9 +134,9 @@ void draw()
       superFade += (255-superFade)/60;
       fill(255, superFade);
       stroke(255);
-      rect(0,0,width,height);
+      rect(0, 0, width, height);
       println(superFade);
-      if(255-superFade < 10)
+      if (255-superFade < 10)
       {
         mode = END;
       }
@@ -145,15 +145,19 @@ void draw()
     currentLevel.levelText();
     break;
   case END:
-    background(255,255,200);
+    background(255, 255, 200);
     fill(0);
-    text(":)",HW,HH);
+    text(":)", HW, HH);
     break;
   }
 }
 
 float oscillation(float osc_offset)
 {
+  if (millis()%1000 == 0)
+  {
+    // BRYAN MAYER! HEARTBEAT HERE!
+  }
   return sin((((millis()%1000)/1000f)*currentLevel.tempo)*TWO_PI);
 }
 
