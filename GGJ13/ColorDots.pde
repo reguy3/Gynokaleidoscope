@@ -82,10 +82,11 @@ class ColorDot
           } 
           else {
             dots.remove(dots.indexOf(this));
+            /*
             if (currentShape+dots.size() <= shapeLimit)
             {
               dots.add(createNewDot());
-            }
+            } */
           }
         }
       }

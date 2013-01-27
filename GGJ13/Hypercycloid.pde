@@ -29,8 +29,9 @@ class Hypercycloid extends Shape
     translate(HW, HH);
     rotate(rot);
     zoom();
-    fill(c);
-    stroke(c);
+    alphaCalc();
+    fill(c, alpha);
+    stroke(c, alpha);
     beginShape();
     while (t <= TWO_PI)
     {

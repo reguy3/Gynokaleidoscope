@@ -13,7 +13,7 @@ int colorIndex(color c)
   for(int i=0;i<colors.length;i++)
     if(colorMatch(colors[i], c))
       return i;
-  println(" - nope");
+  println(" - nope (colorIndex)");
   return -1;
 }
 
@@ -32,7 +32,7 @@ color darken(color c, float s)
   float r = c >> 16&255;
   float g = c >> 8 &255;
   float b = c &255;
-  return color(r/s, g/s, b/s, 255/s);
+  return color(r/s, g/s, b/s);
 }
 
 void unitTesting()

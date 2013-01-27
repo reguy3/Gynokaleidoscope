@@ -35,7 +35,7 @@ class Level
     {
       //println("Dot: " + dots[i].charAt(0) +" "+ dots[i].charAt(1)); 
       //println(parseInt(dots[i].charAt(0)+""));
-      set.add(createNewDot(parseInt(dots[i].substring(0,1)), parseInt(dots[i].substring(1,1))));
+      set.add(createNewDot(parseInt(dots[i].charAt(0)+""), parseInt(dots[i].charAt(1)+"")));
     }
     return set;
   }

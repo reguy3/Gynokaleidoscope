@@ -29,6 +29,17 @@ class Shape
   {
     //does nothing
   }
+  
+  void alphaCalc()  
+  {
+    if(scale < 3)
+      alpha = 255;
+    else if(scale > 0 && 25*scale<255)
+      alpha = 255-25*(int)scale;
+    else
+      alpha=0;
+    //println("Scale: " + scale + " 25Scale: " + scale*25 + " Alpha = " + alpha);
+  }
 
   void scaleUp()
   {
