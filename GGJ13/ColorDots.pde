@@ -59,6 +59,8 @@ class ColorDot
             if (isSet(((Shape) inPlay.get(0)), ((Shape) inPlay.get(1)), ((Shape) inPlay.get(2)), currentLevel.levelNum > 10))
             {
               int nextLevel = currentLevel.levelNum+1;
+              sfade = fade;
+              fade = 255;
               if (nextLevel == levels.size())
               {
                 // YOU WIN!

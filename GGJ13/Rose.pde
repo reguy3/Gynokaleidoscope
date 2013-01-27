@@ -28,7 +28,7 @@ class Rose extends Shape
       loops *= 2;
       break;
     }
-    println(petals);
+    //println(petals);
     radius = floor(dist(mouseX, mouseY, HW, HH));
     rot = atan2(mouseY-HH, mouseX-HW) - HALF_PI;
     c = src.c;
