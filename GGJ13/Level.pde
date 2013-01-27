@@ -13,7 +13,7 @@ class Level
     audioFile = _audioFile;
     if(!audioFile.equals(""))
     {
-      hasSounds = true;
+      hasSound = true;
     }
   }
 }

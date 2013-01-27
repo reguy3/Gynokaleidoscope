@@ -32,8 +32,9 @@ class Hypercycloid extends Shape
   {
     float currRadius = radius/2 + oscillation(osc_offset)*10;
     push();
-    fill(c);
-    stroke(c);
+    alphaCalc();
+    fill(c, alpha);
+    stroke(c, alpha);
     float t = 0;
     translate(HW, HH);
     rotate(rot);
@@ -62,8 +63,9 @@ class Hypercycloid extends Shape
     radius /= 8;
     petals --;
     push();
-    fill(c);
-    stroke(c);
+    alphaCalc();
+    fill(c, alpha);
+    stroke(c, alpha);
     strokeWeight(w);
     float t = 0;
     translate(cx, cy);

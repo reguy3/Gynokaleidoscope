@@ -29,8 +29,9 @@ class Rose extends Shape
   {
     float currRadius = radius + oscillation(osc_offset)*10;
     push();
-    fill(c);
-    stroke(c);
+    alphaCalc();
+    fill(c, alpha);
+    stroke(c, alpha);
     float t = 0;
     translate(HW, HH);
     rotate(rot);
@@ -57,8 +58,9 @@ class Rose extends Shape
   { 
     petals = petals%2 == 0 ? petals/2 : petals;
     push();
-    fill(c);
-    stroke(c);
+    alphaCalc();
+    fill(c, alpha);
+    stroke(c, alpha);
     strokeWeight(w);
     float t = 0;
     translate(cx, cy);

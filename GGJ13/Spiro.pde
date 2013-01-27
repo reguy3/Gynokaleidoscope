@@ -36,7 +36,8 @@ class Spiro extends Shape
     translate(HW, HH);
     zoom();
     noFill();
-    stroke(c);
+    alphaCalc();
+    stroke(c, alpha);
     strokeWeight(3);
     beginShape();
     float b2, b1 = 1/(1-(br/lr));

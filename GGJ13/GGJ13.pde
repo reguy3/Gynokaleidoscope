@@ -67,7 +67,7 @@ void createLevels()
   for (int i=0; i<lines.length; i++)
   {
      String properties[] = split(lines[0], " % ");
-     levels.add(new Level(Integer.parseInt(properties[0]), properties[1], properties[2]);
+     levels.add(new Level(Integer.parseInt(properties[0]), properties[1], properties[2]));
   }
 }
 
