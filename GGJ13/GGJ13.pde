@@ -96,7 +96,7 @@ void draw()
       if (bgNext == null)
         background(255);
       else
-        image(bgNext, 0, 0);
+        image(bgNext, 0, 0, width, height);
       // Faded current level
       tfade = (3-inPlay.size())*(255/3);
       fade += (tfade - fade) / fadeLength;
@@ -104,11 +104,11 @@ void draw()
       //println(sfade);
       pushStyle();
       tint(255, fade);
-      image(bgCurr, 0, 0);
+      image(bgCurr, 0, 0, width, height);
       if (sfade>0 && currentLevel.levelNum > 0)
       {
         tint(255, sfade);
-        image(bgPrev, 0, 0);
+        image(bgPrev, 0, 0, width, height);
       }
       popStyle();
     }
