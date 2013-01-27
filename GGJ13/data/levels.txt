@@ -1,8 +1,10 @@
-100	Make three shapes.	00	00	00
-080	Three of the same color.	00	00	01	01	01
-100	Or three different colors.	00	01	02
-100	Choose same or different.	00	00	00	01	02
-100	Match 3 same shapes.	01	01	11	11	11
+
+100	Make three shapes. [You started as a thought--a joining. Nothing more. Just a spark, leaping from one source to the next. You complete the circuit. Like begets like. Try to take what you have, and link them together.]	00	00	00
+080	Three of the same color. *We've been trying. Maybe this time.* [That spark--you--it took. A one-in-a-million chance. A marvel of mathematics. Really amazing. But you can't stay like this. Part of the business of being is learning to redefine, break down your boundaries and expand beyond them. Keep making chains. You're going to build yourself, link by link. What patterns do you see?]	00	00	01	01	
+120	[Did you hear that? The whole universe moves to that beat. You do too.] *There are two lines!!* [Keep moving.]
+100	Or three different colors. [You know, it isn't enough just to copy what's been here before. Make your own mark. Something that hasn't been seen yet. A new re-combination. You aren't a homogenous being--if you're going to be whole, you have to figure out how to make your many different parts act together. Cells, ecosystems, galaxies, all of these things are the sum of many, acting together. Try it.]	00	01	02
+100	[Don't think that there's only one way to knit yourself together. Like begets like, and opposites attract. Complimentary and contradictory. Yin or Yang. Choose one, and keep building.] Choose same or different.	00	00	00	01	02
+100	Match 3 same shapes. [There are shapes in nature that are repeated over and over and over again. Heaven is in the math. The Fibonacci sequence. The Golden Ratio. Flowers unfurl, shells twist, and stars spin according to these few simple rules--the laws that govern shape. 	01	01	11	11	11
 100	Different colors, same shape.	10	11	12	01	02
 100	3 different shapes	02	12	22
 100	All blue spires or all blue shapes.	22	22	22	12	02
