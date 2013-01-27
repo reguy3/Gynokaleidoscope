@@ -96,3 +96,10 @@ void pop()
   popMatrix();
 }
 
+void exit()
+{
+  stopSound();
+  println("stop");
+  super.exit();
+}
+
