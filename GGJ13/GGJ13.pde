@@ -16,7 +16,7 @@ ArrayList shapes;
 ArrayList levels;
 int tInit = 0;
 Level currentLevel;
-int backgrounds = 9; //number of images
+int backgrounds = 8; //number of images
 PImage[] bgArray;
 
 void setup() 
@@ -39,7 +39,7 @@ void setup()
 
 void draw()
 {
-  background(bgArray[currentLevel.bg]);
+  background(bgArray[currentLevel.levelNum]);
   // Vignette
   // Draw layers
   for (int i=0;i<shapes.size();i++)

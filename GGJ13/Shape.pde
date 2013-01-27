@@ -32,9 +32,9 @@ class Shape
   
   void alphaCalc()  
   {
-    if(scale < 3)
+    if(scale < 7)
       alpha = 255;
-    else if(scale > 0 && 25*scale<255)
+    else if(scale >= 7 && 25*scale<255)
       alpha = 255-25*(int)scale;
     else
       alpha=0;
