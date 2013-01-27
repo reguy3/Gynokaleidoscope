@@ -40,20 +40,27 @@ class Level
     return set;
   }
 
+  float textFade = 0;
   void levelText() {
-    textAlign(CENTER);
-    int shift = 75;
+    int duration = 3000;
     if (!displayedText)
     {
       tInit = millis();
       displayedText = true;
     }
-    int seconds = 5;
-    if (millis()-tInit < seconds*1000) {
-      fill(0, min(255, seconds*1000-millis()+tInit));
-      text("Week " + (levelNum+1), width/2, shift);
-      text(storyText, width/2, height-shift);
-    }
+    int target = keyPressed || millis()-tInit < duration
+      ? 255
+      : 0;
+    textFade = abs(target-textFade) < 15
+      ? target
+      : textFade+(target-textFade)/15;
+    if(textFade == 0) return;
+    textAlign(CENTER);
+    int shift = 75;
+    if (keyPressed) tInit += 3*(millis()-tInit)/4;
+    fill(0, textFade);
+    text("Week " + (levelNum+1), width/2, shift);
+    text(storyText, width/2, height-shift);
   }
 }
 
