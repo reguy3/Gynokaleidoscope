@@ -50,6 +50,7 @@ class Rose extends Shape
     alphaCalc();
     fill(c, alpha);
     stroke(c, alpha);
+    strokeWeight(0);
     beginShape();
     while (t <= loops)
     {

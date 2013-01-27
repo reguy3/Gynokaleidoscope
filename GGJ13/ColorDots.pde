@@ -16,6 +16,7 @@ color[] colors = {
 class ColorDot
 {
   color c;
+  int ts = 1;
   float s = 0f;
   int start, prevMillis, owidth;
   boolean selected = false;
@@ -50,7 +51,6 @@ class ColorDot
         {
           for (int i=0; i<currentShape; i++)
             ((Shape)shapes.get(i)).scaleUp();
-          playGrow();
           Shape newShape = createNewShape();
           shapes.add(newShape);  
           currentShape++;
@@ -65,29 +65,31 @@ class ColorDot
               bgPrev = bgCurr;
               bgCurr = bgNext;
               bgNext = bgArray[nextLevel];
-              if (nextLevel == 2)//levels.size())
+              if (nextLevel == levels.size())
               {
                 // YOU WIN!
-                for(int i=0;i<shapes.size();i++)
+                for (int i=0;i<shapes.size();i++)
                 {
-                  ((Shape) shapes.get(i)).tscale = 2.5 - i*.2;
+                  ((Shape) shapes.get(i)).tscale = 2.5 - i*.1;
                   println(2.5-i*.1);
                 }
+                for (int i=0;i<dots.size();i++)
+                {
+                  ((ColorDot) dots.get(i)).ts = 0;
+                }
                 inPlay = new ArrayList();
+                mode = FADE;
                 return;
-                //mode = END;
               }
               else 
               {
                 currentLevel = ((Level) levels.get(nextLevel));
                 shapeCount = currentLevel.dots.length;
               }
-              playWin();
             }
             else
             {
               println("FAIL");
-              playFail();
               currentLevel.displayedText = false;
             }
             dots = currentLevel.set();
@@ -101,9 +103,9 @@ class ColorDot
             dots.remove(dots.indexOf(this));
             /*
             if (currentShape+dots.size() <= shapeLimit)
-            {
-              dots.add(createNewDot());
-            } */
+             {
+             dots.add(createNewDot());
+             } */
           }
         }
       }
@@ -114,7 +116,10 @@ class ColorDot
       push();
       translate(HW, HH);
       scale(s);
-      s = min(1, s+.1);
+      if (ts == 1)
+        s = min(1, s+.1);
+      else
+        s = max(0, s-.1);
       prevMillis = millis();
       float t = (prevMillis-start)/3000f;
       float x = owidth*cos(t)/s;

@@ -11,7 +11,8 @@ void createLevels()
 
 class Level
 {
-  int levelNum, tempo, bg;
+  int levelNum, bg;
+  float tempo;
   String storyText;
   String audioFile;
   boolean hasSound = false;
@@ -22,7 +23,7 @@ class Level
   {
     levelNum = _levelNum;
     storyText = _storyText;
-    tempo = bpm;
+    tempo = bpm/100f;
     bg = 0;
     audioFile = "audio/level_"+levelNum+".mp3";
     dots = _dots;
@@ -58,7 +59,7 @@ class Level
     textAlign(CENTER);
     int shift = 75;
     if (keyPressed) tInit += 3*(millis()-tInit)/4;
-    fill(0, textFade);
+    fill(255, textFade);
     text("Week " + (levelNum+1), width/2, shift);
     text(storyText, width/2, height-shift);
   }

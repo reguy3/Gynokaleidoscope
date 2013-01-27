@@ -10,6 +10,7 @@ int mode = 0;
 static final int TITLE = 0;
 static final int GAME = 1;
 static final int END = 2;
+static final int FADE= 3;
 
 float HW, HH;
 String levelFile = "levels.txt";
@@ -23,6 +24,7 @@ int tInit = 0;
 Level currentLevel;
 int backgrounds = 8; //number of images
 PImage[] bgArray;
+float superFade = 0;
 
 void setup() 
 {
@@ -84,23 +86,32 @@ void draw()
     break;
 
   case GAME:
+  case FADE:
     textSize(40);
     // Background, next level
-    image(bgNext, 0, 0);
-    // Faded current level
-    tfade = (3-inPlay.size())*(255/3);
-    fade += (tfade - fade) / fadeLength;
-    sfade -= sfade < 5 ? sfade : sfade/fadeLength;
-    //println(sfade);
-    pushMatrix();
-    tint(255, fade);
-    image(bgCurr, 0, 0);
-    if (sfade>0 && currentLevel.levelNum > 0)
+    if (mode == GAME)
     {
-      tint(255, sfade);
-      image(bgPrev, 0, 0);
+      if (bgNext == null)
+        background(255);
+      else
+        image(bgNext, 0, 0);
+      // Faded current level
+      tfade = (3-inPlay.size())*(255/3);
+      fade += (tfade - fade) / fadeLength;
+      sfade -= sfade < 5 ? sfade : sfade/fadeLength;
+      //println(sfade);
+      pushMatrix();
+      tint(255, fade);
+      image(bgCurr, 0, 0);
+      if (sfade>0 && currentLevel.levelNum > 0)
+      {
+        tint(255, sfade);
+        image(bgPrev, 0, 0);
+      }
+      popMatrix();
     }
-    popMatrix();
+    else
+      background(255);
     // Draw layers
     for (int i=0;i<shapes.size();i++)
     {
@@ -110,21 +121,40 @@ void draw()
       ((Shape)shapes.get(i)).draw();
     }
     // Draw dots
-    for (int i=0;i<dots.size();i++)
-      ((ColorDot)dots.get(i)).draw();
+    if (mode == GAME)
+      for (int i=0;i<dots.size();i++)
+        ((ColorDot)dots.get(i)).draw();
+    else
+    {
+      fill(255);
+      // TEXT?
+    }
+    if (mode == FADE)
+    {
+      superFade += (255-superFade)/60;
+      fill(255, superFade);
+      stroke(255);
+      rect(0,0,width,height);
+      println(superFade);
+      if(255-superFade < 10)
+      {
+        mode = END;
+      }
+    }
     pmousePressed = mousePressed;
     currentLevel.levelText();
     break;
-
   case END:
-
+    background(255,255,200);
+    fill(0);
+    text(":)",HW,HH);
     break;
   }
 }
 
 float oscillation(float osc_offset)
 {
-  return sin(millis()/500f+osc_offset);
+  return sin((((millis()%1000)/1000f)*currentLevel.tempo)*TWO_PI);
 }
 
 float oscillation()
