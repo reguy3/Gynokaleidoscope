@@ -22,10 +22,12 @@ class ColorDot
   Point prev;
   int TYPE;
 
-  ColorDot(color... ci)
+  ColorDot(color[]... ci)
   {
-    if (ci.length > 0)
-      c = ci[0];
+    if (ci.length > 0 && ci[0].length > 0)
+    {
+      c = ci[0][0];
+    }
     else
       c = colors[floor(random(colors.length))];
     start = floor(random(sq(millis())));
@@ -49,11 +51,11 @@ class ColorDot
             ((Shape)shapes.get(i)).scaleUp();
           shapes.add(createNewShape());  
           currentShape++;
+          dots.remove(dots.indexOf(this));
           if (currentShape+dots.size() <= shapeLimit)
           {
             dots.add(createNewDot());
           }
-          dots.remove(dots.indexOf(this));
         }
       }
     }
@@ -124,8 +126,10 @@ ColorDot createNewDot()
     c[0] = colorIndex(op1.c) == colorIndex(op2.c)
       ? op1.c
       : colors[3 - colorIndex(op1.c) - colorIndex(op2.c)];
-    //println("Type: "+type);
-    //println("Color:"+colorIndex(c[0]));
+    println("OP1: "+op1.TYPE+" "+colorIndex(op1.c));
+    println("OP2: "+op2.TYPE+" "+colorIndex(op2.c));
+    println("NEW: "+type+" "+colorIndex(c[0]));
+    println("---");
   } 
   else {
     type = floor(random(3));
@@ -149,9 +153,10 @@ class RoseDot extends ColorDot
   float frame = peelRate * 2;
   Rose rose = new Rose(0, 0, 0, 0);
 
-  RoseDot(color... ci)
+  RoseDot(color[] ci)
   {
-    TYPE = 0;
+    super(ci);
+    TYPE = ROSE;
   }
 
   Shape createNewShape()
@@ -187,9 +192,10 @@ class SpiroDot extends ColorDot
   int frame = 0;
   Spiro spiro = new Spiro(10, 20, 5, c);
 
-  SpiroDot(color... ci)
+  SpiroDot(color[] ci)
   {
-    TYPE = 1;
+    super(ci);
+    TYPE = SPIRO;
   }
 
   Shape createNewShape()
@@ -227,9 +233,10 @@ class HyperDot extends ColorDot
   float peelRate = 60;
   float frame = peelRate*2;
 
-  HyperDot(color... ci)
+  HyperDot(color[] ci)
   {
-    TYPE = 2;
+    super(ci);
+    TYPE = HYPER;
   }
 
   Shape createNewShape()

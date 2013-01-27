@@ -11,7 +11,7 @@ class Rose extends Shape
   float loops = TWO_PI;
   Rose(int k, int r, float g, color ci)
   {
-    TYPE = 0;
+    TYPE = ROSE;
 
     petals = k%2==0 ? k/2 : k;
     radius = r;
@@ -21,7 +21,6 @@ class Rose extends Shape
   Rose(RoseDot src)
   {
     petals = ceil(src.frame/src.peelRate);
-    println(petals);
     switch((int)petals)
     {
     case 4:

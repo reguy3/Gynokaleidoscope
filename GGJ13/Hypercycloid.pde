@@ -10,7 +10,7 @@ class Hypercycloid extends Shape
   float osc_offset = (float)Math.random()*2*PI;
   Hypercycloid(int k, int r, float g, color ci)
   {
-    TYPE = 1;
+    TYPE = HYPER;
     
     petals = k%2==0 ? k/2 : k;
     radius = r;

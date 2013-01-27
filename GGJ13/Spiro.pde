@@ -29,7 +29,7 @@ class Spiro extends Shape
   };
   Spiro(float b, float l, float a, color ci)
   {
-    TYPE = 2;
+    TYPE = SPIRO;
     
     br = b;
     lr = l;

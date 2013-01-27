@@ -2,6 +2,10 @@ import java.awt.Point;
 import krister.Ess.*;
 
 static final float STEP = TWO_PI/50;
+static final int ROSE = 0;
+static final int SPIRO = 1;
+static final int HYPER = 2;
+
 float HW, HH;
 String levelFile = "levels.txt";
 boolean pmousePressed = false;
