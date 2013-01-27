@@ -11,7 +11,7 @@ void createLevels()
 
 class Level
 {
-  int levelNum, tempo;
+  int levelNum, tempo, bg;
   String storyText;
   String audioFile;
   boolean hasSound = false;
@@ -23,6 +23,7 @@ class Level
     levelNum = _levelNum;
     storyText = _storyText;
     tempo = bpm;
+    bg = 0;
     audioFile = "audio/level_"+levelNum+".mp3";
     dots = _dots;
   }
