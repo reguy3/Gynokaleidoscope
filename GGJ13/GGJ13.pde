@@ -13,13 +13,15 @@ int shapeLimit = 16;
 int currentShape = 0;
 ArrayList shapes;
 ArrayList levels;
-
+Level currentLevel;
 
 void setup() 
 {
   size(800, 600);
   HW = width/2;
   HH = height/2;
+  createLevels();
+  currentLevel = (Level)(levels.get(0));
   dots = new ArrayList();
   for (byte i=0;i<shapeCount;i++)
     dots.add(new SpiroDot(floor(random(1000000000))));
@@ -68,7 +70,7 @@ void createLevels()
   for (int i=0; i<lines.length; i++)
   {
      String properties[] = split(lines[0], " % ");
-     levels.add(new Level(Integer.parseInt(properties[0]), properties[1], properties[2]));
+     levels.add(new Level(i, properties[0], properties[1]));
   }
 }
 
