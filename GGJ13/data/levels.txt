@@ -1,2 +1,2 @@
-0 % Create three of a kind. % level0.mp3
-1 % Great job! Do it again. % level1.mp3
+100	Birds of a feather flock together
+080	Practice makes perfect

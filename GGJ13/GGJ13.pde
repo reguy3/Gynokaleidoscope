@@ -3,9 +3,6 @@ import krister.Ess.*;
 
 static final float STEP = TWO_PI/50;
 float HW, HH;
-int R = 100;
-int r = 160;
-float P = 60;
 String levelFile = "levels.txt";
 boolean pmousePressed = false;
 int shapeCount = 5;
@@ -24,7 +21,7 @@ void setup()
   currentLevel = (Level)(levels.get(0));
   dots = new ArrayList();
   for (byte i=0;i<shapeCount;i++)
-    dots.add(new SpiroDot(floor(random(1000000000))));
+    dots.add(createNewDot(floor(random(1000000000))));
   shapes = new ArrayList(shapeLimit);
   unitTesting();
 }
@@ -62,15 +59,3 @@ void pop()
   popStyle();
   popMatrix();
 }
-
-void createLevels()
-{
-  levels = new ArrayList();
-  String lines[] = loadStrings(levelFile);
-  for (int i=0; i<lines.length; i++)
-  {
-     String properties[] = split(lines[0], " % ");
-     levels.add(new Level(i, properties[0], properties[1]));
-  }
-}
-

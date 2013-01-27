@@ -97,18 +97,18 @@ class ColorDot
   }
 }
 
-ColorDot createNewDot()
+ColorDot createNewDot(int... s)
 {
   switch(floor(random(3)))
   {
   case 0:
-    return new RoseDot();
+    return new RoseDot(s);
   case 1:
-    return new SpiroDot();
+    return new SpiroDot(s);
   case 2:
-    return new HyperDot();
+    return new HyperDot(s);
   }
-  return new RoseDot();
+  return new RoseDot(s);
 }
 
 class RoseDot extends ColorDot
