@@ -15,6 +15,8 @@ class Level
   String storyText;
   String audioFile;
   boolean hasSound = false;
+  boolean displayedText = false;
+  
 
   public Level (int _levelNum, String _storyText, int bpm)
   {
@@ -23,5 +25,23 @@ class Level
     tempo = bpm;
     audioFile = "audio/level_"+levelNum+".mp3";
   }
+
+
+void levelText() {
+  textAlign(CENTER);
+  int shift = 50;
+  if(!displayedText)
+  {
+    tInit = millis();
+    displayedText = true;
+  }
+  int seconds = 5;
+  if (millis()-tInit < seconds*1000) {
+    text("Level " + levelNum, width/2, shift);
+    text(storyText, width/2, height-shift);
+  }
 }
+}
+  
+  
 
