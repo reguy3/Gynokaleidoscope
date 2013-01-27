@@ -114,7 +114,7 @@ ColorDot createNewDot(int... s)
 class RoseDot extends ColorDot
 {
   float peelRate = 60;
-  float frame = peelRate * 9;
+  float frame = peelRate * 2;
   Rose rose = new Rose(0, 0, 0, 0);
 
   RoseDot(int... s)

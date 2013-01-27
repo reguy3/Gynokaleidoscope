@@ -34,7 +34,7 @@ class Rose extends Shape
       break;
     case 10:
       petals = 5/2f;
-      loops *= 4;
+      loops *= 2;
       break;
     }
     println(petals);
