@@ -26,7 +26,7 @@ PImage[] bgArray;
 
 void setup() 
 {
-  size(1600, 800);
+  size(800, 600);
   HW = width/2;
   HH = height/2;
   createLevels();
@@ -47,10 +47,10 @@ void setup()
   ekg = new float[ceil(260/5)];
   for (int i=0;i<ekg.length;i++)
     ekg[i] = 0f;
-  ekg[0] = 20f;
-  ekg[1] = 100f;
-  ekg[2] = -20f;
-  ekg[5] = 5f;
+  ekg[2] = 20f;
+  ekg[3] = 100f;
+  ekg[4] = -20f;
+  ekg[8] = 5f;
 }
 
 PImage bgPrev, bgCurr, bgNext;
@@ -62,12 +62,12 @@ void draw()
   {
   case TITLE:
     image(bgArray[0], 0, 0);
-    filter(BLUR, 8);
+    //filter(BLUR, 8);
     textAlign(CENTER);
     textSize(180);
     for (int i=0;i<2;i++)
     {
-      filter(BLUR, 2);
+      //filter(BLUR, 2);
       fill(i*255);
       stroke(i*255);
       strokeWeight(12);
@@ -84,6 +84,7 @@ void draw()
     break;
 
   case GAME:
+    textSize(40);
     // Background, next level
     image(bgNext, 0, 0);
     // Faded current level
