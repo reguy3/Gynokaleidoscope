@@ -158,7 +158,7 @@ float oscillation(float osc_offset)
   {
     // BRYAN MAYER! HEARTBEAT HERE!
   }
-  return sin((((millis()%1000)/1000f)*currentLevel.tempo)*TWO_PI);
+  return sin((((millis()%1000)/1000f)*currentLevel.tempo+osc_offset)*TWO_PI);
 }
 
 void push()
