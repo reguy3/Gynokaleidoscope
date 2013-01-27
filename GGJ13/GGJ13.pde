@@ -28,7 +28,7 @@ float superFade = 0;
 
 void setup() 
 {
-  size(800, 600);
+  size(1600, 1200);
   HW = width/2;
   HH = height/2;
   createLevels();
@@ -88,7 +88,6 @@ void draw()
 
   case GAME:
   case FADE:
-    background(0);
     textSize(40);
     // Background, next level
     if (mode == GAME)
