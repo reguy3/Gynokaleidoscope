@@ -21,7 +21,7 @@ PImage[] bgArray;
 
 void setup() 
 {
-  size(800, 600);
+  size(1600, 1200);
   HW = width/2;
   HH = height/2;
   createLevels();
@@ -29,7 +29,7 @@ void setup()
   dots = currentLevel.set();
   shapes = new ArrayList(shapeLimit);
   unitTesting();
-  textFont(createFont("Arial", 48));
+  textFont(createFont("Arial", 72));
   bgArray = new PImage[backgrounds];
   for(int i=0;i<backgrounds;i++)
     bgArray[i] = loadImage(i+".jpg");
