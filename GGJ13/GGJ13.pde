@@ -21,7 +21,7 @@ void setup()
   currentLevel = (Level)(levels.get(0));
   dots = new ArrayList();
   for (byte i=0;i<shapeCount;i++)
-    dots.add(createNewDot(floor(random(1000000000))));
+    dots.add(createNewDot());
   shapes = new ArrayList(shapeLimit);
   unitTesting();
   
