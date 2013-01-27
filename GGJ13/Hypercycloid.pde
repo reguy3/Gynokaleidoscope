@@ -8,25 +8,17 @@ class Hypercycloid extends Shape
 {
   float rot, radius;
   float osc_offset = (float)Math.random()*2*PI;
-  Hypercycloid(int k, int r, float g, color ci)
-  {
-    TYPE = HYPER;
-    
-    petals = k%2==0 ? k/2 : k;
-    radius = r;
-    rot = g;
-    c = ci;
-  }
   Hypercycloid(ColorDot src)
   {
+    super(src.c, HYPER);
+    
     petals = floor(((HyperDot) src).frame/((HyperDot) src).peelRate);
     radius = floor(dist(mouseX, mouseY, HW, HH)/2);
     rot = atan2(mouseY-HH, mouseX-HW);
-    c = src.c;
   }
   Hypercycloid(color ci)
   {
-    c = ci;
+    super(ci, HYPER);
   }
 
   void draw()

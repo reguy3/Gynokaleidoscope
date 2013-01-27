@@ -49,6 +49,7 @@ class Level
     }
     int seconds = 5;
     if (millis()-tInit < seconds*1000) {
+      fill(255, min(255, seconds*1000-millis()+tInit));
       text("Week " + (levelNum+1), width/2, shift);
       text(storyText, width/2, height-shift);
     }

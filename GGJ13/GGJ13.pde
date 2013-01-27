@@ -10,7 +10,7 @@ float HW, HH;
 String levelFile = "levels.txt";
 boolean pmousePressed = false;
 int shapeCount = 5;
-int shapeLimit = 16;
+int shapeLimit = 100;
 int currentShape = 0;
 ArrayList shapes;
 ArrayList levels;
@@ -23,7 +23,7 @@ void setup()
   HW = width/2;
   HH = height/2;
   createLevels();
-  currentLevel = (Level)(levels.get(1));
+  currentLevel = (Level)(levels.get(0));
   dots = currentLevel.set();
   shapes = new ArrayList(shapeLimit);
   unitTesting();
@@ -38,7 +38,12 @@ void draw()
   // Vignette
   // Draw layers
   for (int i=0;i<shapes.size();i++)
+  {
+    if(shapes.size()-i > 10) continue;
+    //fill(0, 52);
+    //rect(0, 0, width, height);
     ((Shape)shapes.get(i)).draw();
+  }
   // Draw dots
   for (int i=0;i<dots.size();i++)
     ((ColorDot)dots.get(i)).draw();
@@ -66,3 +71,4 @@ void pop()
   popStyle();
   popMatrix();
 }
+
