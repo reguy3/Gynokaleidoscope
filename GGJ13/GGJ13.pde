@@ -21,7 +21,7 @@ PImage[] bgArray;
 
 void setup() 
 {
-  size(800, 600);
+  size(1600, 1200);
   HW = width/2;
   HH = height/2;
   createLevels();
@@ -33,15 +33,19 @@ void setup()
   bgArray = new PImage[backgrounds];
   for(int i=0;i<backgrounds;i++)
     bgArray[i] = loadImage(i+".jpg");
+  bgPrev = bgArray[0];
+  bgCurr = bgArray[0];
+  bgNext = bgArray[1];
   //setupSound();
   //playMainTheme();
 }
 
+PImage bgPrev, bgCurr, bgNext;
 float tfade = 255, fade = 255, sfade = 0, fadeLength = 10;
 void draw()
 {
   // Background, next level
-  background(bgArray[currentLevel.levelNum+1]);
+  background(bgNext);
   // Faded current level
   tfade = (3-inPlay.size())*(255/3);
   fade += (tfade - fade) / fadeLength;
@@ -49,11 +53,11 @@ void draw()
   println(sfade);
   pushMatrix();
   tint(255, fade);
-  image(bgArray[currentLevel.levelNum],0,0);
-  if(currentLevel.levelNum > 0)
+  image(bgCurr,0,0);
+  if(sfade>0 && currentLevel.levelNum > 0)
   {
     tint(255, sfade);
-    image(bgArray[currentLevel.levelNum-1],0,0);
+    image(bgPrev,0,0);
   }
   popMatrix();
   // Draw layers

@@ -61,6 +61,9 @@ class ColorDot
               int nextLevel = currentLevel.levelNum+1;
               sfade = fade;
               fade = 255;
+              bgPrev = bgCurr;
+              bgCurr = bgNext;
+              bgNext = bgArray[nextLevel];
               if (nextLevel == levels.size())
               {
                 // YOU WIN!
