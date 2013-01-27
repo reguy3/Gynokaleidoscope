@@ -6,7 +6,7 @@ static final int ROSE = 0;
 static final int HYPER = 1;
 static final int SPIRO = 2;
 
-int mode = 1;
+int mode = 0;
 static final int TITLE = 0;
 static final int GAME = 1;
 static final int END = 2;
@@ -26,7 +26,7 @@ PImage[] bgArray;
 
 void setup() 
 {
-  size(800, 600);
+  size(1600, 800);
   HW = width/2;
   HH = height/2;
   createLevels();
@@ -41,27 +41,46 @@ void setup()
   bgPrev = bgArray[0];
   bgCurr = bgArray[0];
   bgNext = bgArray[1];
-  setupSound();
-  playMainTheme();
+  //setupSound();
+  //playMainTheme();
+
+  ekg = new float[ceil(260/5)];
+  for (int i=0;i<ekg.length;i++)
+    ekg[i] = 0f;
+  ekg[0] = 20f;
+  ekg[1] = 100f;
+  ekg[2] = -20f;
+  ekg[5] = 5f;
 }
 
 PImage bgPrev, bgCurr, bgNext;
 float tfade = 255, fade = 255, sfade = 0, fadeLength = 10;
+float[] ekg;
 void draw()
 {
   switch(mode)
   {
   case TITLE:
-    background(noise(frameCount)*100, noise(frameCount*2)*100, noise(frameCount*3)*100);
+    image(bgArray[0], 0, 0);
+    filter(BLUR, 8);
     textAlign(CENTER);
-    pushMatrix();
-    translate(HW, HH);
-    rotate(sin(frameCount*STEP*3)/2);
-    fill(0);
-    text("TITLE SCREEN", 5*sin(frameCount*STEP*3), 25);
-    fill(255);
-    text("TITLE SCREEN", 0, 20);
-    popMatrix();
+    textSize(180);
+    for (int i=0;i<2;i++)
+    {
+      filter(BLUR, 2);
+      fill(i*255);
+      stroke(i*255);
+      strokeWeight(12);
+      strokeCap(SQUARE);
+      text("scope", HW+100, HH-(i*5));
+      noFill();
+      beginShape();
+      for (int x=0;x<260;x+=10)
+      {
+        vertex(HW-410+x, HH-5-(i*5)-ekg[(frameCount+floor(x/10))%ekg.length]);
+      }
+      endShape();
+    }
     break;
 
   case GAME:
@@ -97,7 +116,7 @@ void draw()
     break;
 
   case END:
-    
+
     break;
   }
 }
@@ -123,18 +142,9 @@ void pop()
   popMatrix();
 }
 
-<<<<<<< HEAD
 void mouseClicked()
 {
-  if(mode > 0) return;
+  if (mode > 0) return;
   mode = 1;
 }
-=======
-void exit()
-{
-  stopSound();
-  println("stop");
-  super.exit();
-}
 
->>>>>>> 5bb277db300677948a01fcaeee713d34e510998c
