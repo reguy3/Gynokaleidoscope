@@ -1,10 +1,10 @@
 AudioChannel mainTheme;
-AudioChannel seWinChime;
-AudioChannel seChime1, seChime2, seChime3, seChime4, seChime5, seChime6, seChime7, seChime8;
-AudioChannel seSoftChime1, seSoftChime2, seSoftChime3, seSoftChime4, seSoftChime5, seSoftChime6, seSoftChime7, seSoftChime8;
-AudioChannel seMultiChime1, seMultiChime2, seMultiChime3, seMultiChime4, seMultiChime5, seMultiChime6, seMultiChime7, seMultiChime8;
-AudioChannel seBlock1, seBlock2, seBlock3, seBlock4, seBlock5, seBlock6, seBlock7, seBlock8,
-             seBlock9, seBlock10, seBlock11, seBlock12, seBlock13, seBlock14, seBlock15;
+//AudioChannel seWinChime;
+//AudioChannel seChime1, seChime2, seChime3, seChime4, seChime5, seChime6, seChime7, seChime8;
+//AudioChannel seSoftChime1, seSoftChime2, seSoftChime3, seSoftChime4, seSoftChime5, seSoftChime6, seSoftChime7, seSoftChime8;
+//AudioChannel seMultiChime1, seMultiChime2, seMultiChime3, seMultiChime4, seMultiChime5, seMultiChime6, seMultiChime7, seMultiChime8;
+//AudioChannel seBlock1, seBlock2, seBlock3, seBlock4, seBlock5, seBlock6, seBlock7, seBlock8,
+//             seBlock9, seBlock10, seBlock11, seBlock12, seBlock13, seBlock14, seBlock15;
 
 void setupSound()
 {
@@ -12,56 +12,56 @@ void setupSound()
   Ess.start(this);
 
   // load background songs into new AudioChannels
-  mainTheme = new AudioChannel("MotherNodeTheme.mp3");
+  mainTheme = new AudioChannel("Spirograph.mp3");
   
-  // load Chime sound effects
-  seChime1 = new AudioChannel("Chime1.mp3");
-  seChime2 = new AudioChannel("Chime2.mp3");
-  seChime3 = new AudioChannel("Chime3.mp3");
-  seChime4 = new AudioChannel("Chime4.mp3");
-  seChime5 = new AudioChannel("Chime5.mp3");
-  seChime6 = new AudioChannel("Chime6.mp3");
-  seChime7 = new AudioChannel("Chime7.mp3");
-  seChime8 = new AudioChannel("Chime8.mp3");
-  
-  // load soft chimes
-  seSoftChime1 = new AudioChannel("SoftChime1.mp3");
-  seSoftChime2 = new AudioChannel("SoftChime2.mp3");
-  seSoftChime3 = new AudioChannel("SoftChime3.mp3");
-  seSoftChime4 = new AudioChannel("SoftChime4.mp3");
-  seSoftChime5 = new AudioChannel("SoftChime5.mp3");
-  seSoftChime6 = new AudioChannel("SoftChime6.mp3");
-  seSoftChime7 = new AudioChannel("SoftChime7.mp3");
-  seSoftChime8 = new AudioChannel("SoftChime8.mp3");
-  
-  // load multi-chimes
-  seMultiChime1 = new AudioChannel("MultiChime1.mp3");
-  seMultiChime2 = new AudioChannel("MultiChime2.mp3");
-  seMultiChime3 = new AudioChannel("MultiChime3.mp3");
-  seMultiChime4 = new AudioChannel("MultiChime4.mp3");
-  seMultiChime5 = new AudioChannel("MultiChime5.mp3");
-  seMultiChime6 = new AudioChannel("MultiChime6.mp3");
-  seMultiChime7 = new AudioChannel("MultiChime7.mp3");
-  
-  // load blocks
-  seBlock1 = new AudioChannel("Block1.mp3");
-  seBlock2 = new AudioChannel("Block2.mp3");
-  seBlock3 = new AudioChannel("Block3.mp3");
-  seBlock4 = new AudioChannel("Block4.mp3");
-  seBlock5 = new AudioChannel("Block5.mp3");
-  seBlock6 = new AudioChannel("Block6.mp3");
-  seBlock7 = new AudioChannel("Block7.mp3");
-  seBlock8 = new AudioChannel("Block8.mp3");
-  seBlock9 = new AudioChannel("Block9.mp3");
-  seBlock10 = new AudioChannel("Block10.mp3");
-  seBlock11 = new AudioChannel("Block11.mp3");
-  seBlock12 = new AudioChannel("Block12.mp3");
-  seBlock13 = new AudioChannel("Block13.mp3");
-  seBlock14 = new AudioChannel("Block14.mp3");
-  seBlock15 = new AudioChannel("Block15.mp3");
-  
-  // win chime
-  seWinChime = new AudioChannel("WinChime.mp3");
+//  // load Chime sound effects
+//  seChime1 = new AudioChannel("Chime1.mp3");
+//  seChime2 = new AudioChannel("Chime2.mp3");
+//  seChime3 = new AudioChannel("Chime3.mp3");
+//  seChime4 = new AudioChannel("Chime4.mp3");
+//  seChime5 = new AudioChannel("Chime5.mp3");
+//  seChime6 = new AudioChannel("Chime6.mp3");
+//  seChime7 = new AudioChannel("Chime7.mp3");
+//  seChime8 = new AudioChannel("Chime8.mp3");
+//  
+//  // load soft chimes
+//  seSoftChime1 = new AudioChannel("SoftChime1.mp3");
+//  seSoftChime2 = new AudioChannel("SoftChime2.mp3");
+//  seSoftChime3 = new AudioChannel("SoftChime3.mp3");
+//  seSoftChime4 = new AudioChannel("SoftChime4.mp3");
+//  seSoftChime5 = new AudioChannel("SoftChime5.mp3");
+//  seSoftChime6 = new AudioChannel("SoftChime6.mp3");
+//  seSoftChime7 = new AudioChannel("SoftChime7.mp3");
+//  seSoftChime8 = new AudioChannel("SoftChime8.mp3");
+//  
+//  // load multi-chimes
+//  seMultiChime1 = new AudioChannel("MultiChime1.mp3");
+//  seMultiChime2 = new AudioChannel("MultiChime2.mp3");
+//  seMultiChime3 = new AudioChannel("MultiChime3.mp3");
+//  seMultiChime4 = new AudioChannel("MultiChime4.mp3");
+//  seMultiChime5 = new AudioChannel("MultiChime5.mp3");
+//  seMultiChime6 = new AudioChannel("MultiChime6.mp3");
+//  seMultiChime7 = new AudioChannel("MultiChime7.mp3");
+//  
+//  // load blocks
+//  seBlock1 = new AudioChannel("Block1.mp3");
+//  seBlock2 = new AudioChannel("Block2.mp3");
+//  seBlock3 = new AudioChannel("Block3.mp3");
+//  seBlock4 = new AudioChannel("Block4.mp3");
+//  seBlock5 = new AudioChannel("Block5.mp3");
+//  seBlock6 = new AudioChannel("Block6.mp3");
+//  seBlock7 = new AudioChannel("Block7.mp3");
+//  seBlock8 = new AudioChannel("Block8.mp3");
+//  seBlock9 = new AudioChannel("Block9.mp3");
+//  seBlock10 = new AudioChannel("Block10.mp3");
+//  seBlock11 = new AudioChannel("Block11.mp3");
+//  seBlock12 = new AudioChannel("Block12.mp3");
+//  seBlock13 = new AudioChannel("Block13.mp3");
+//  seBlock14 = new AudioChannel("Block14.mp3");
+//  seBlock15 = new AudioChannel("Block15.mp3");
+//  
+//  // win chime
+//  seWinChime = new AudioChannel("WinChime.mp3");
 }
 
 
@@ -93,7 +93,7 @@ void stopMainTheme()
 // Sound Effects
 //
 
-
+/*
 //Chimes
 void playChime()
 {
@@ -351,7 +351,7 @@ void sePlayWin()
 {
   seWinChime.play();
 }
-
+*/
 
 public void stopSound()
 {

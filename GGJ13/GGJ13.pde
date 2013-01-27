@@ -24,6 +24,9 @@ void setup()
     dots.add(createNewDot(floor(random(1000000000))));
   shapes = new ArrayList(shapeLimit);
   unitTesting();
+  
+  setupSound();
+  playMainTheme();
 }
 
 void draw()
