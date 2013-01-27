@@ -146,7 +146,7 @@ ColorDot createNewDot()
   }
   return new RoseDot((color[]) c);
 }
-ColorDot createNewDot(byte type, byte c)
+ColorDot createNewDot(int type, int c)
 {
   color[] ca = {colors[c]};
   switch(type) {

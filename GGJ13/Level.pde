@@ -26,7 +26,11 @@ class Level
     audioFile = "audio/level_"+levelNum+".mp3";
     set = new ColorDot[dots.length];
     for(int i=0;i<dots.length;i++)
-      set[i] = createNewDot(int(dots[i][0]), int(dots[i][1]));
+    {
+      //println("Dot: " + dots[i].charAt(0) +" "+ dots[i].charAt(1)); 
+      //println(parseInt(dots[i].charAt(0)+""));
+      set[i] = createNewDot(parseInt(dots[i].charAt(0)+""), parseInt(dots[i].charAt(1)+""));
+    }
   }
 
 
