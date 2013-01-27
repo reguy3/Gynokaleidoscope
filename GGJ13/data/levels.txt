@@ -1,2 +1,2 @@
-100	Birds of a feather flock together
-080	Practice makes perfect
+100	Birds of a feather flock together	00	00	00
+080	Practice makes perfect	00	00	01	01	01
