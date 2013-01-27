@@ -24,9 +24,7 @@ void setup()
   HH = height/2;
   createLevels();
   currentLevel = (Level)(levels.get(0));
-  dots = new ArrayList();
-  for (byte i=0;i<shapeCount;i++)
-    dots.add(createNewDot());
+  dots = currentLevel.set;
   shapes = new ArrayList(shapeLimit);
   unitTesting();
   textFont(createFont("Arial", 48));

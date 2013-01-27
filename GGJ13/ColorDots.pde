@@ -49,12 +49,29 @@ class ColorDot
         {
           for (int i=0; i<currentShape; i++)
             ((Shape)shapes.get(i)).scaleUp();
-          shapes.add(createNewShape());  
+          Shape newShape = createNewShape();
+          shapes.add(newShape);  
           currentShape++;
-          dots.remove(dots.indexOf(this));
-          if (currentShape+dots.size() <= shapeLimit)
+          inPlay.add(newShape);
+          if (inPlay.size() == 3)
           {
-            dots.add(createNewDot());
+            if (isSet(((Shape) inPlay.get(0)), ((Shape) inPlay.get(1)), ((Shape) inPlay.get(2)), currentLevel.levelNum > 10))
+            {
+              currentLevel = ((Level) levels.get(currentLevel.levelNum+1));
+            }
+            dots = currentLevel.set;
+            for (int i=0;i<inPlay.size();i++)
+            {
+              ((Shape) inPlay.get(i)).scaleUp();
+            }
+            inPlay = new ArrayList();
+          } 
+          else {
+            dots.remove(dots.indexOf(this));
+            if (currentShape+dots.size() <= shapeLimit)
+            {
+              dots.add(createNewDot());
+            }
           }
         }
       }
@@ -81,7 +98,14 @@ class ColorDot
         if (!dotSelected && !pmousePressed && mousePressed)
         {
           dotSelected = true;
-          selected = true;
+          int index = dots.indexOf(this);
+          for(int i=index;i<dots.size();i++)
+          {
+            ColorDot di = (ColorDot) dots.get(i);
+            if(s == 1 && dist(di.prev.x, di.prev.y, mouseX, mouseY) < 16)
+              index = i;
+          }
+          ((ColorDot) dots.get(index)).selected = true;
         }
       }
       else
@@ -148,7 +172,9 @@ ColorDot createNewDot()
 }
 ColorDot createNewDot(int type, int c)
 {
-  color[] ca = {colors[c]};
+  color[] ca = {
+    colors[c]
+  };
   switch(type) {
   case ROSE:
     return new RoseDot(ca);
@@ -188,12 +214,12 @@ class RoseDot extends ColorDot
   {
     stroke(0);
     strokeWeight(5);
-    rose.pleaseDraw(4, 20, millis()/600f, x, y, 0, 5);
+    rose.pleaseDraw(4, 22, millis()/600f, x, y, 0, 0);
     line(x, y, mouseX, mouseY);
     fill(c);
     stroke(c);
     strokeWeight(3);
-    rose.pleaseDraw(4, 20, millis()/600f, x, y, c, 3);
+    rose.pleaseDraw(4, 20, millis()/600f, x, y, c, 0);
     line(x, y, mouseX, mouseY);
     peel(frame, peelRate, c);
     if (frame < peelRate*10) frame++;

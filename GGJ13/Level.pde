@@ -16,7 +16,7 @@ class Level
   String audioFile;
   boolean hasSound = false;
   boolean displayedText = false;
-  ColorDot[] set;
+  ArrayList set;
 
   public Level (int _levelNum, String _storyText, int bpm, String[] dots)
   {
@@ -24,31 +24,29 @@ class Level
     storyText = _storyText;
     tempo = bpm;
     audioFile = "audio/level_"+levelNum+".mp3";
-    set = new ColorDot[dots.length];
-    for(int i=0;i<dots.length;i++)
+    set = new ArrayList(dots.length);
+    for (int i=0;i<dots.length;i++)
     {
       //println("Dot: " + dots[i].charAt(0) +" "+ dots[i].charAt(1)); 
       //println(parseInt(dots[i].charAt(0)+""));
-      set[i] = createNewDot(parseInt(dots[i].charAt(0)+""), parseInt(dots[i].charAt(1)+""));
+      set.add(createNewDot(parseInt(dots[i].charAt(0)+""), parseInt(dots[i].charAt(1)+"")));
     }
   }
 
 
-void levelText() {
-  textAlign(CENTER);
-  int shift = 50;
-  if(!displayedText)
-  {
-    tInit = millis();
-    displayedText = true;
-  }
-  int seconds = 5;
-  if (millis()-tInit < seconds*1000) {
-    text("Level " + levelNum, width/2, shift);
-    text(storyText, width/2, height-shift);
+  void levelText() {
+    textAlign(CENTER);
+    int shift = 50;
+    if (!displayedText)
+    {
+      tInit = millis();
+      displayedText = true;
+    }
+    int seconds = 5;
+    if (millis()-tInit < seconds*1000) {
+      text("Week " + (levelNum+1), width/2, shift);
+      text(storyText, width/2, height-shift);
+    }
   }
 }
-}
-  
-  
 
