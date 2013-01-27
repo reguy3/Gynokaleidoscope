@@ -22,6 +22,7 @@ class ColorDot
   boolean selected = false;
   Point prev;
   int TYPE;
+  PImage icon;
 
   ColorDot(color[]... ci)
   {
@@ -42,6 +43,9 @@ class ColorDot
     if (selected)
     {
       dragShape(prev.x, prev.y);
+      translate(prev.x, prev.y);
+      rotate(millis()/600f);
+      image(icon, -30, -30, 60, 60);
       if (!mousePressed)
       {
         selected = false;
@@ -115,7 +119,6 @@ class ColorDot
     // ORBIT BEHAVIOR
     else
     {
-      push();
       translate(HW, HH);
       scale(s);
       if (ts == 1)
@@ -131,9 +134,11 @@ class ColorDot
       x = d*cos(a);
       y = d*sin(a);
 
+      translate(x, y);
+      rotate(millis()/600f);
       if (s == 1 && dist(x, y, mouseX-HW, mouseY-HH) < 16)
       {
-        shape(x, y, true);
+        image(icon, -30, -30, 60, 60);
         if (!dotSelected && !pmousePressed && mousePressed)
         {
           dotSelected = true;
@@ -148,8 +153,7 @@ class ColorDot
         }
       }
       else
-        shape(x, y, false);
-      pop();
+        image(icon, -25, -25, 50, 50);
       prev = new Point(round(x+HW), round(y+HH));
     }
     pop();
@@ -236,6 +240,7 @@ class RoseDot extends ColorDot
     super(ci);
     rose = new Rose(ci[0]);
     TYPE = ROSE;
+    icon = loadImage("icons/"+ROSE+colorIndex(c)+".png");
   }
 
   Shape createNewShape()
@@ -255,12 +260,10 @@ class RoseDot extends ColorDot
   {
     stroke(0);
     strokeWeight(5);
-    rose.pleaseDraw(4, 22, millis()/600f, x, y, 0, 0);
     line(x, y, mouseX, mouseY);
     fill(c);
     stroke(c);
     strokeWeight(3);
-    rose.pleaseDraw(4, 20, millis()/600f, x, y, c, 0);
     line(x, y, mouseX, mouseY);
     peel(frame, peelRate, c);
     if (frame < peelRate*10) frame++;
@@ -277,6 +280,7 @@ class SpiroDot extends ColorDot
     super(ci);
     TYPE = SPIRO;
     spiro = new Spiro(ci[0]);
+    icon = loadImage("icons/"+SPIRO+colorIndex(c)+".png");
   }
 
   Shape createNewShape()
@@ -292,7 +296,6 @@ class SpiroDot extends ColorDot
 
   void dragShape(float x, float y)
   {
-    spiro.pleaseDraw(x, y, millis()/600f, 10, 20, 5, 0, 7);
     stroke(0);
     strokeWeight(5);
     line(x, y, mouseX, mouseY);
@@ -300,7 +303,6 @@ class SpiroDot extends ColorDot
     fill(c);
     float osc = sin(STEP*frame/3)/3+.5;
     ellipse(x+(osc*(mouseX-x)), y+(osc*(mouseY-y)), 20, 20);
-    spiro.pleaseDraw(x, y, millis()/600f, 10, 20, 5, c, 5);
     stroke(c);
     strokeWeight(3);
     line(x, y, mouseX, mouseY);
@@ -319,6 +321,7 @@ class HyperDot extends ColorDot
     super(ci);
     TYPE = HYPER;
     cycloid = new Hypercycloid(ci[0]);
+    icon = loadImage("icons/"+HYPER+colorIndex(c)+".png");
   }
 
   Shape createNewShape()
@@ -336,12 +339,10 @@ class HyperDot extends ColorDot
   {
     stroke(0);
     strokeWeight(5);
-    cycloid.pleaseDraw(5, 32, millis()/600f, x, y, 0, 0);
     line(x, y, mouseX, mouseY);
     fill(c);
     stroke(c);
     strokeWeight(3);
-    cycloid.pleaseDraw(5, 30, millis()/600f, x, y, c, 0);
     line(x, y, mouseX, mouseY);
     peel(frame, peelRate, c);
     if (frame < peelRate*10) frame++;
