@@ -28,7 +28,7 @@ float superFade = 0;
 
 void setup() 
 {
-  size(1600, 1200);
+  size(screenWidth, screenHeight);
   HW = width/2;
   HH = height/2;
   createLevels();
@@ -36,7 +36,7 @@ void setup()
   dots = currentLevel.set();
   shapes = new ArrayList(shapeLimit);
   unitTesting();
-  textFont(createFont("Arial", 48));
+  textFont(createFont("Arial", 180));
   bgArray = new PImage[backgrounds];
   for (int i=0;i<backgrounds;i++)
     bgArray[i] = loadImage(i+".jpg");
@@ -64,7 +64,7 @@ void draw()
   switch(mode)
   {
   case TITLE:
-    image(bgArray[0], 0, 0);
+    image(bgArray[0], 0, 0, width, height);
     //filter(BLUR, 8);
     textAlign(CENTER);
     textSize(180);
@@ -132,7 +132,7 @@ void draw()
     }
     if (mode == FADE)
     {
-      superFade += 255/120;
+      superFade += 255/240;
       fill(255, superFade);
       stroke(255);
       rect(0, 0, width, height);
@@ -149,7 +149,7 @@ void draw()
   case END:
     background(255, 255, 200);
     fill(0);
-    text(":)", HW, HH);
+    text("You can stop struggling now. You've prepared all you can. It's time.", 0, HH, width, 300);
     break;
   }
 }

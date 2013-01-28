@@ -74,7 +74,9 @@ class ColorDot
                 int j = 0;
                 for (int i=shapes.size()-1;i>=0;i--)
                 {
-                  ((Shape) shapes.get(i)).tscale = (++j)*.1;
+                  Shape op = (Shape) shapes.get(i);
+                  op.tscale = (++j)*.1;
+                  op.alpha = 255;
                 }
                 for (int i=0;i<dots.size();i++)
                 {
@@ -86,9 +88,12 @@ class ColorDot
               }
               else 
               {
-                bgPrev = bgCurr;
-                bgCurr = bgNext;
-                bgNext = bgArray[nextLevel];
+                if (nextLevel < bgArray.length)
+                {
+                  bgPrev = bgCurr;
+                  bgCurr = bgNext;
+                  bgNext = bgArray[nextLevel];
+                }
                 currentLevel = ((Level) levels.get(nextLevel));
                 shapeCount = currentLevel.dots.length;
               }

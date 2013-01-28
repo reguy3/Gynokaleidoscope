@@ -29,12 +29,16 @@ class Shape
   {
     //does nothing
   }
-  
+
   void alphaCalc()  
   {
-    if(scale < 7)
+    if (mode == FADE) {
       alpha = 255;
-    else if(scale >= 7 && 25*scale<255)
+      return;
+    }
+    if (scale < 7)
+      alpha = 255;
+    else if (scale >= 7 && 25*scale<255)
       alpha = 255-25*(int)scale;
     else
       alpha=0;

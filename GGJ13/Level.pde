@@ -4,6 +4,7 @@ void createLevels()
   String[] lines = loadStrings(levelFile);
   for (int i=0;i<lines.length;i++)
   {
+    println("Level "+(i+1));
     String[] data = lines[i].split("\t");
     levels.add(new Level(i, data[1], int(data[0]), subset(data, 2)));
   }
@@ -55,13 +56,13 @@ class Level
     textFade = abs(target-textFade) < 15
       ? target
       : textFade+(target-textFade)/15;
-    if(textFade == 0) return;
+    if (textFade == 0) return;
     textAlign(CENTER);
-    int shift = 250;
+    int shift = 200;
     if (keyPressed) tInit += 3*(millis()-tInit)/4;
     fill(255, 100);
-    noStroke();
     rect(0, height-shift-10, width, shift+10);
+    noStroke();
     fill(0, textFade);
     text("Week " + (levelNum+1), HW, 75);
     text(storyText, 0, height-shift, width, shift);
