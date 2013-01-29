@@ -28,7 +28,7 @@ float superFade = 0;
 
 void setup() 
 {
-  size(screenWidth, screenHeight);
+  size(displayWidth, displayHeight);
   HW = width/2;
   HH = height/2;
   createLevels();

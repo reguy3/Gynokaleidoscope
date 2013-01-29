@@ -6,5 +6,5 @@
 100	There are shapes in nature that are repeated over and over and over again. Heaven is in the math. The Fibonacci sequence. The Golden Ratio. Flowers unfurl, shells twist, and stars spin according to these few simple laws--shape. Geometry. Repeating pairs.	01	01	11	11	11
 100	You'll find often that the patterns that you thought were familiar create unfamiliar iterations. Don't be confused. Keep growing. You have many, many more to discover.	10	11	12	01	02
 100	As you grow, you change. Nothing is still, here. You'll be something greater than the sum of your parts. Keep moving.	02	12	22
-100	You have more power than you know, yet. All potential energy. Evolution is a marvelous thing.	22	22	22	12	02
-100	You haven't even dreamed of how much lies beyond your sight, just as a water flea can't imagine a world beyond the pond.	22	11	00	22	20
+100	All blue spires or all blue shapes.	22	22	22	12	02
+100	Choose: all different or all spires.	22	11	00	22	20
